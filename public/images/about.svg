@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect fill="#1e293b" width="800" height="600"/>
+  <rect fill="#334155" x="50" y="100" width="200" height="400" rx="8"/>
+  <rect fill="#475569" x="300" y="150" width="180" height="350" rx="8"/>
+  <rect fill="#334155" x="530" y="80" width="220" height="420" rx="8"/>
+  <circle cx="400" cy="300" r="60" fill="#f97316" opacity="0.2"/>
+  <text x="400" y="560" text-anchor="middle" fill="#94a3b8" font-family="sans-serif" font-size="20">Eunic Invest</text>
+</svg>

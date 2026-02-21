@@ -1,0 +1,45 @@
+---
+import ServiceCard from './ServiceCard.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const services = [
+  { icon: '🏠', titleKey: 'service.1.title' as const, descKey: 'service.1.desc' as const },
+  { icon: '🔧', titleKey: 'service.2.title' as const, descKey: 'service.2.desc' as const },
+  { icon: '⚡', titleKey: 'service.3.title' as const, descKey: 'service.3.desc' as const },
+  { icon: '🏘️', titleKey: 'service.4.title' as const, descKey: 'service.4.desc' as const },
+  { icon: '🎨', titleKey: 'service.5.title' as const, descKey: 'service.5.desc' as const },
+  { icon: '🧱', titleKey: 'service.6.title' as const, descKey: 'service.6.desc' as const },
+  { icon: '🔨', titleKey: 'service.7.title' as const, descKey: 'service.7.desc' as const },
+  { icon: '🚪', titleKey: 'service.8.title' as const, descKey: 'service.8.desc' as const },
+];
+---
+
+<section id="services" class="py-20 lg:py-28 bg-dark-950">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-16 reveal">
+      <p class="text-primary-500 font-heading font-semibold text-sm uppercase tracking-widest mb-3">
+        {t('services.section')}
+      </p>
+      <h2 class="font-heading font-bold text-3xl sm:text-4xl mb-4">
+        {t('services.title')}
+      </h2>
+      <p class="text-muted max-w-2xl mx-auto">{t('services.subtitle')}</p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.map((service, i) => (
+        <ServiceCard
+          icon={service.icon}
+          title={t(service.titleKey)}
+          description={t(service.descKey)}
+          delay={i * 0.08}
+        />
+      ))}
+    </div>
+  </div>
+</section>

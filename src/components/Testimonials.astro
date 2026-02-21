@@ -1,0 +1,39 @@
+---
+import TestimonialCard from './TestimonialCard.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const testimonials = [
+  { textKey: 'testimonial.1.text' as const, nameKey: 'testimonial.1.name' as const, workKey: 'testimonial.1.work' as const },
+  { textKey: 'testimonial.2.text' as const, nameKey: 'testimonial.2.name' as const, workKey: 'testimonial.2.work' as const },
+  { textKey: 'testimonial.3.text' as const, nameKey: 'testimonial.3.name' as const, workKey: 'testimonial.3.work' as const },
+];
+---
+
+<section id="testimonials" class="py-20 lg:py-28 bg-dark-950">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-16 reveal">
+      <p class="text-primary-500 font-heading font-semibold text-sm uppercase tracking-widest mb-3">
+        {t('testimonials.section')}
+      </p>
+      <h2 class="font-heading font-bold text-3xl sm:text-4xl mb-4">
+        {t('testimonials.title')}
+      </h2>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid md:grid-cols-3 gap-6">
+      {testimonials.map((item, i) => (
+        <TestimonialCard
+          text={t(item.textKey)}
+          name={t(item.nameKey)}
+          work={t(item.workKey)}
+          delay={i * 0.15}
+        />
+      ))}
+    </div>
+  </div>
+</section>

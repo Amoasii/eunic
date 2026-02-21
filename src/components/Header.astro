@@ -1,0 +1,79 @@
+---
+import LanguagePicker from './LanguagePicker.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const navItems = [
+  { href: '#about', label: t('nav.about') },
+  { href: '#services', label: t('nav.services') },
+  { href: '#portfolio', label: t('nav.portfolio') },
+  { href: '#testimonials', label: t('nav.testimonials') },
+  { href: '#contacts', label: t('nav.contacts') },
+];
+---
+
+<header
+  id="header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href={`/${lang}/`} class="flex items-center gap-2 shrink-0">
+        <div class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center font-heading font-bold text-lg text-white">
+          E
+        </div>
+        <span class="font-heading font-bold text-xl text-white">
+          Eunic<span class="text-primary-500"> Invest</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm font-semibold text-muted hover:text-primary-500 transition-colors"
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Language + Mobile btn -->
+      <div class="flex items-center gap-4">
+        <LanguagePicker />
+        <button
+          id="menu-btn"
+          class="md:hidden text-white p-2"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-dark-950/95 backdrop-blur-md border-t border-white/10"
+  >
+    <nav class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-4" aria-label="Mobile navigation">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="text-base font-semibold text-muted hover:text-primary-500 transition-colors py-2"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
