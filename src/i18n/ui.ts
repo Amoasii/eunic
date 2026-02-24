@@ -68,13 +68,6 @@ export const ui = {
     'portfolio.section': 'Портфолио',
     'portfolio.title': 'Наши работы',
     'portfolio.subtitle': 'Примеры завершённых проектов, которыми мы гордимся',
-    'portfolio.item1': 'Ремонт квартиры в Бельцах',
-    'portfolio.item2': 'Ремонт кухни',
-    'portfolio.item3': 'Отделка офиса',
-    'portfolio.item4': 'Реконструкция фасада',
-    'portfolio.item5': 'Ремонт ванной комнаты',
-    'portfolio.item6': 'Кровельные работы',
-
     // Testimonials
     'testimonials.section': 'Отзывы',
     'testimonials.title': 'Что говорят клиенты',
@@ -99,6 +92,7 @@ export const ui = {
     'contacts.hours': 'Режим работы',
     'contacts.hours.value': 'Пн–Пт: 08:00–18:00, Сб: 09:00–15:00',
     'contacts.social': 'Мы в соцсетях',
+    'contacts.region': 'Работаем по всему северу Молдовы',
 
     // Footer
     'footer.slogan': 'Создаём уют вместе',
@@ -164,13 +158,6 @@ export const ui = {
     'portfolio.section': 'Portofoliu',
     'portfolio.title': 'Lucrările noastre',
     'portfolio.subtitle': 'Exemple de proiecte finalizate de care suntem mândri',
-    'portfolio.item1': 'Renovarea apartamentului în Bălți',
-    'portfolio.item2': 'Renovarea bucătăriei',
-    'portfolio.item3': 'Finisarea biroului',
-    'portfolio.item4': 'Reconstrucția fațadei',
-    'portfolio.item5': 'Renovarea băii',
-    'portfolio.item6': 'Lucrări de acoperiș',
-
     // Testimonials
     'testimonials.section': 'Recenzii',
     'testimonials.title': 'Ce spun clienții',
@@ -195,6 +182,7 @@ export const ui = {
     'contacts.hours': 'Program de lucru',
     'contacts.hours.value': 'Lun–Vin: 08:00–18:00, Sâm: 09:00–15:00',
     'contacts.social': 'Rețele sociale',
+    'contacts.region': 'Lucrăm în tot nordul Moldovei',
 
     // Footer
     'footer.slogan': 'Creăm confort împreună',

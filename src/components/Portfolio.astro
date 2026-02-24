@@ -4,14 +4,7 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const items = [
-  { img: '/images/portfolio-1.jpg', label: t('portfolio.item1') },
-  { img: '/images/portfolio-2.jpg', label: t('portfolio.item2') },
-  { img: '/images/portfolio-3.jpg', label: t('portfolio.item3') },
-  { img: '/images/portfolio-4.jpg', label: t('portfolio.item4') },
-  { img: '/images/portfolio-5.jpg', label: t('portfolio.item5') },
-  { img: '/images/portfolio-6.jpg', label: t('portfolio.item6') },
-];
+const images = Array.from({ length: 18 }, (_, i) => `/images/collage/collage-${i + 1}.jpg`);
 ---
 
 <section id="portfolio" class="py-20 lg:py-28 bg-dark-900">
@@ -27,24 +20,231 @@ const items = [
       <p class="text-muted max-w-2xl mx-auto">{t('portfolio.subtitle')}</p>
     </div>
 
-    <!-- Gallery -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {items.map((item, i) => (
-        <div
-          class="reveal group relative rounded-xl overflow-hidden aspect-[4/3] bg-dark-800"
-          style={`--reveal-animation: fade-up 0.6s ease-out forwards; animation-delay: ${i * 0.1}s`}
-        >
-          <img
-            src={item.img}
-            alt={item.label}
-            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            loading="lazy"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-            <p class="font-heading font-semibold text-white">{item.label}</p>
+    <!-- Carousel -->
+    <div class="carousel-wrapper">
+      <button class="carousel-btn carousel-btn--prev" id="carousel-prev" aria-label="Назад">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel" id="portfolio-carousel">
+        {images.map((src, i) => (
+          <div class="carousel-slide">
+            <img
+              src={src}
+              alt={`${t('portfolio.title')} ${i + 1}`}
+              loading="lazy"
+            />
           </div>
-        </div>
+        ))}
+      </div>
+      <button class="carousel-btn carousel-btn--next" id="carousel-next" aria-label="Вперёд">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <div class="carousel-dots" id="portfolio-dots">
+      {images.map((_, i) => (
+        <button class={`dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Фото ${i + 1}`} />
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  .carousel-wrapper {
+    position: relative;
+  }
+
+  .carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    scrollbar-width: none;
+    cursor: grab;
+    user-select: none;
+  }
+
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-slide {
+    flex: 0 0 30%;
+    scroll-snap-align: center;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    height: 400px;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .carousel-slide:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Arrow buttons */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    backdrop-filter: blur(4px);
+  }
+
+  .carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.75);
+  }
+
+  .carousel-btn--prev {
+    left: -1.5rem;
+  }
+
+  .carousel-btn--next {
+    right: -1.5rem;
+  }
+
+  /* Dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.375rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+
+  .dot.active {
+    background: var(--color-primary-500, #f59e0b);
+    transform: scale(1.3);
+  }
+
+  /* Tablet */
+  @media (max-width: 1023px) {
+    .carousel-slide {
+      flex: 0 0 45%;
+      height: 350px;
+    }
+
+    .carousel-btn--prev { left: 0.5rem; }
+    .carousel-btn--next { right: 0.5rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 639px) {
+    .carousel-slide {
+      flex: 0 0 80%;
+      height: 300px;
+    }
+
+    .carousel-btn {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .carousel-btn--prev { left: 0.25rem; }
+    .carousel-btn--next { right: 0.25rem; }
+  }
+</style>
+
+<script>
+  function initCarousel() {
+    const carousel = document.getElementById('portfolio-carousel');
+    const dots = document.querySelectorAll('#portfolio-dots .dot');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    if (!carousel || !dots.length) return;
+
+    const slides = carousel.querySelectorAll('.carousel-slide');
+
+    const getSlideStep = () => {
+      return (slides[0] as HTMLElement).offsetWidth + 16; // gap 1rem = 16px
+    };
+
+    const updateDots = () => {
+      const scrollLeft = carousel.scrollLeft;
+      const step = getSlideStep();
+      const index = Math.round(scrollLeft / step);
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    };
+
+    carousel.addEventListener('scroll', updateDots, { passive: true });
+
+    prevBtn?.addEventListener('click', () => {
+      carousel.scrollBy({ left: -getSlideStep(), behavior: 'smooth' });
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      carousel.scrollBy({ left: getSlideStep(), behavior: 'smooth' });
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = Number(dot.getAttribute('data-index'));
+        carousel.scrollTo({ left: index * getSlideStep(), behavior: 'smooth' });
+      });
+    });
+
+    // Mouse drag to swipe
+    let isDragging = false;
+    let startX = 0;
+    let scrollStart = 0;
+
+    carousel.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.pageX;
+      scrollStart = carousel.scrollLeft;
+      carousel.style.cursor = 'grabbing';
+      carousel.style.scrollSnapType = 'none';
+    });
+
+    carousel.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const dx = e.pageX - startX;
+      carousel.scrollLeft = scrollStart - dx;
+    });
+
+    const stopDrag = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      carousel.style.cursor = '';
+      carousel.style.scrollSnapType = 'x mandatory';
+    };
+
+    carousel.addEventListener('mouseup', stopDrag);
+    carousel.addEventListener('mouseleave', stopDrag);
+  }
+
+  initCarousel();
+  document.addEventListener('astro:page-load', initCarousel);
+</script>
