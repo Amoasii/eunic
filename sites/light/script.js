@@ -1,3 +1,39 @@
+// Language Switcher
+(function() {
+  var titles = { ru: 'Eunic Invest \u2014 \u0420\u0435\u043c\u043e\u043d\u0442 \u0438 \u043e\u0442\u0434\u0435\u043b\u043a\u0430 \u0432 \u041c\u043e\u043b\u0434\u043e\u0432\u0435', ro: 'Eunic Invest \u2014 Renovare \u0219i finisare \u00een Moldova' };
+  var descs = { ru: 'Eunic Invest \u2014 \u0440\u0435\u043c\u043e\u043d\u0442 \u043a\u0432\u0430\u0440\u0442\u0438\u0440 \u0438 \u043f\u043e\u043c\u0435\u0449\u0435\u043d\u0438\u0439 \u0432 \u041c\u043e\u043b\u0434\u043e\u0432\u0435. \u041a\u0430\u0447\u0435\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0435 \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u044b, \u0438\u043d\u0434\u0438\u0432\u0438\u0434\u0443\u0430\u043b\u044c\u043d\u044b\u0439 \u043f\u043e\u0434\u0445\u043e\u0434, \u0433\u0430\u0440\u0430\u043d\u0442\u0438\u044f \u043d\u0430 \u0432\u0441\u0435 \u0440\u0430\u0431\u043e\u0442\u044b.', ro: 'Eunic Invest \u2014 renovarea apartamentelor \u0219i spa\u021biilor \u00een Moldova. Materiale de calitate, abordare individual\u0103, garan\u021bie pentru toate lucr\u0103rile.' };
+
+  function setLang(lang) {
+    var html = document.documentElement;
+    html.className = html.className.replace(/\blang-(ru|ro)\b/g, '').trim() + ' lang-' + lang;
+    html.setAttribute('lang', lang);
+    document.title = titles[lang];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', descs[lang]);
+    document.querySelectorAll('[data-ru-alt]').forEach(function(el) {
+      el.setAttribute('alt', el.getAttribute('data-' + lang + '-alt') || '');
+    });
+    document.querySelectorAll('[data-ru-aria-label]').forEach(function(el) {
+      el.setAttribute('aria-label', el.getAttribute('data-' + lang + '-aria-label') || '');
+    });
+    document.querySelectorAll('[data-ru-title]').forEach(function(el) {
+      el.setAttribute('title', el.getAttribute('data-' + lang + '-title') || '');
+    });
+    document.querySelectorAll('.lang-link').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    try { localStorage.setItem('lang', lang); } catch(e) {}
+  }
+
+  window.setLang = setLang;
+
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch(e) {}
+  if (saved === 'ro' || saved === 'ru') {
+    setLang(saved);
+  }
+})();
+
 // Scroll Reveal
 (function() {
   var observer = new IntersectionObserver(function(entries) {

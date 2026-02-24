@@ -95,20 +95,6 @@ img {
   flex-shrink: 0;
 }
 
-.logo-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  background: var(--primary);
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.125rem;
-  color: #fff;
-}
-
 .logo-text {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -170,6 +156,13 @@ img {
   border-radius: 0.25rem;
   transition: color 0.3s, background 0.3s;
   color: rgba(255,255,255,0.7);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.875rem;
 }
 
 .lang-link:hover {
@@ -882,13 +875,6 @@ img {
   font-size: 0.875rem;
 }
 
-/* Small logo in footer */
-.footer-logo .logo-icon {
-  width: 2rem;
-  height: 2rem;
-  font-size: 0.875rem;
-}
-
 .footer-logo .logo-text {
   color: var(--text);
   font-size: 1.125rem;
@@ -928,6 +914,10 @@ img {
 .reveal.visible {
   animation: var(--reveal-animation, fade-up 0.6s ease-out forwards);
 }
+
+/* ========== LANGUAGE TOGGLE ========== */
+html.lang-ru .ro { display: none; }
+html.lang-ro .ru { display: none; }
 
 /* ========== UTILITY ========== */
 .hidden {
