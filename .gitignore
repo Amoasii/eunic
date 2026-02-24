@@ -18,3 +18,6 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
+
+# Images in project root (use public/images/ instead)
+/*.jpg
