@@ -32,6 +32,8 @@ jobs:
           cp sites/light/index.html sites/light/script.js sites/light/style.css _site/light/
           mkdir _site/bold
           cp sites/bold/index.html sites/bold/script.js sites/bold/style.css _site/bold/
+          mkdir _site/minimal
+          cp sites/minimal/index.html sites/minimal/script.js sites/minimal/style.css _site/minimal/
           echo 'eunic.md' > _site/CNAME
 
       - uses: actions/upload-pages-artifact@v3
