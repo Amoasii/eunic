@@ -10,19 +10,19 @@ Pure HTML/CSS/JS, no build tools or frameworks. Hosted on GitHub Pages at **euni
 ## Deployment
 
 Pushes to `main` trigger `.github/workflows/deploy.yml`:
-- Dark theme → root (`eunic.md/`)
-- Light theme → `/light` (`eunic.md/light`)
+- Light theme → root (`eunic.md/`)
+- Dark theme → `/dark` (`eunic.md/dark`)
 - Bold theme → `/bold` (`eunic.md/bold`)
 - Minimal theme → `/minimal` (`eunic.md/minimal`)
-- Images copied to `_site/images/`, paths fixed via `sed` (dark only — light/bold/minimal use `../images/` which resolves correctly from subdirs)
+- Images copied to `_site/images/`, paths fixed via `sed` (light at root — dark/bold/minimal use `../images/` which resolves correctly from subdirs)
 - CNAME set to `eunic.md`
 
 ## Architecture
 
 ```
 sites/
-├── dark/    # Dark theme (default, deployed to root)
-├── light/   # Light theme (deployed to /light)
+├── dark/    # Dark theme (deployed to /dark)
+├── light/   # Light theme (default, deployed to root)
 ├── bold/    # Bold theme (deployed to /bold) — Electric Indigo + Acid Lime, mobile-first
 ├── minimal/ # Minimal theme (deployed to /minimal) — Warm editorial, Teal + serif
 └── images/  # Shared images (hero-bg.jpg, about.jpg, collage/collage-1..18.jpg)
