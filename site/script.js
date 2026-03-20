@@ -29,9 +29,7 @@
 
   var saved = null;
   try { saved = localStorage.getItem('lang'); } catch(e) {}
-  if (saved === 'ro' || saved === 'ru') {
-    setLang(saved);
-  }
+  setLang(saved === 'ro' || saved === 'ru' ? saved : 'ro');
 })();
 
 // Scroll Reveal
