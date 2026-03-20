@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eunic-Invest — Modern Gradient</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gradient-start: #1a47b8;
+      --gradient-end: #7c3aed;
+      --gradient: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --body-bg: #f0f0f0;
+      --text-dark: #1a1a2e;
+      --text-muted: #64648c;
+      --card-w: 800px;
+      --card-h: 480px;
+      --card-radius: 16px;
+      --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: var(--body-bg);
+      font-family: var(--font);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 90px 28px;
+      gap: 78px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Page title ── */
+    .page-title {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 5.5px;
+    }
+
+    /* ── Cards wrapper ── */
+    .cards-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 67px;
+    }
+    @media (min-width: 1800px) {
+      .cards-wrapper {
+        flex-direction: row;
+        gap: 100px;
+        align-items: flex-start;
+      }
+    }
+
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-label {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 17px;
+    }
+
+    /* ── Card shell ── */
+    .card {
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      position: relative;
+      box-shadow:
+        0 4px 6px -1px rgba(0,0,0,0.07),
+        0 10px 15px -3px rgba(0,0,0,0.1),
+        0 20px 40px -4px rgba(0,0,0,0.12);
+    }
+
+    /* ── Responsive card scaling ── */
+    @media (max-width: 860px) {
+      :root {
+        --card-w: 92vw;
+        --card-h: calc(92vw * 0.6);
+      }
+      .card { border-radius: 14px; }
+    }
+
+    /* ═══════════════════════════════════════════
+       FRONT SIDE — Full gradient
+       ═══════════════════════════════════════════ */
+    .card-front {
+      background: var(--gradient);
+      color: var(--white);
+      padding: 50px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Soft inner glow */
+    .card-front::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .front-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .front-logo {
+      height: 53px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+
+    .front-badges {
+      display: flex;
+      gap: 11px;
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 100px;
+      padding: 7px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      color: var(--white);
+      white-space: nowrap;
+    }
+
+    .front-center {
+      position: relative;
+      z-index: 1;
+    }
+
+    .front-slogan {
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+
+    .front-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .front-free {
+      font-size: 16px;
+      font-weight: 500;
+      opacity: 0.8;
+      letter-spacing: 0.3px;
+    }
+
+    .front-url {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: 0.7px;
+      opacity: 0.9;
+    }
+
+    /* ═══════════════════════════════════════════
+       BACK SIDE — White with gradient accents
+       ═══════════════════════════════════════════ */
+    .card-back {
+      background: var(--off-white);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Gradient accent stripe at top */
+    .card-back::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--gradient);
+    }
+
+    .back-content {
+      flex: 1;
+      display: flex;
+      padding: 40px 45px 34px;
+      gap: 34px;
+    }
+
+    .back-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-width: 0;
+    }
+
+    .back-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Section headings */
+    .section-heading {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    /* Services pills */
+    .services-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .service-pill {
+      background: linear-gradient(135deg, rgba(26,71,184,0.08), rgba(124,58,237,0.08));
+      border: 1px solid rgba(26,71,184,0.1);
+      border-radius: 100px;
+      padding: 6px 17px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-dark);
+      white-space: nowrap;
+    }
+
+    /* Contact info */
+    .contact-block {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .contact-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Gradient-colored SVG icons for contacts */
+    .gradient-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .gradient-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Phone section */
+    .phones {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .phone-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-dark);
+      letter-spacing: 0.4px;
+    }
+
+    /* Address & schedule */
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    /* Messenger icons */
+    .messenger-row {
+      display: flex;
+      gap: 11px;
+      margin-top: 3px;
+    }
+
+    .messenger-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .messenger-icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* QR code */
+    .qr-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qr-code {
+      width: 134px;
+      height: 134px;
+      border-radius: 11px;
+      border: 2px solid rgba(26,71,184,0.1);
+    }
+
+    .qr-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.7px;
+    }
+
+    /* ═══════════════════════════════════════════
+       PRINT STYLES — 85×55mm
+       ═══════════════════════════════════════════ */
+    @media print {
+      @page {
+        size: auto;
+        margin: 10mm;
+      }
+
+      body {
+        background: none;
+        padding: 0;
+        gap: 10mm;
+      }
+
+      .page-title { display: none; }
+
+      .cards-wrapper {
+        flex-direction: column;
+        gap: 10mm;
+      }
+
+      .card-label { display: none; }
+
+      .card {
+        width: 85mm;
+        height: 55mm;
+        border-radius: 2mm;
+        box-shadow: none;
+        border: 0.5px solid #ccc;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .card-front {
+        padding: 6mm 7mm;
+      }
+
+      .front-logo { height: 7mm; }
+      .front-slogan { font-size: 14px; }
+      .badge { font-size: 6px; padding: 1.5mm 3mm; }
+      .front-free { font-size: 6px; }
+      .front-url { font-size: 7px; }
+
+      .back-content {
+        padding: 5mm 5mm 4mm;
+        gap: 4mm;
+      }
+
+      .section-heading { font-size: 5px; letter-spacing: 1.2px; margin-bottom: 1.5mm; }
+      .service-pill { font-size: 5.5px; padding: 1mm 2.5mm; }
+      .services-list { gap: 1.5mm; }
+      .phone-row { font-size: 7px; }
+      .info-row { font-size: 6px; }
+      .gradient-icon, .contact-icon { width: 2.5mm; height: 2.5mm; }
+      .messenger-icon { width: 4.5mm; height: 4.5mm; }
+      .qr-code { width: 16mm; height: 16mm; }
+      .qr-label { font-size: 5px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">Modern Gradient</div>
+
+  <div class="cards-wrapper">
+
+    <!-- ═══════ FRONT ═══════ -->
+    <div class="card-container">
+      <div class="card-label">Față</div>
+      <div class="card card-front">
+        <div class="front-top">
+          <img src="../../logo.png" alt="Eunic Invest" class="front-logo">
+          <div class="front-badges">
+            <span class="badge">Experiență</span>
+            <span class="badge">Calitate</span>
+            <span class="badge">Prețuri corecte</span>
+          </div>
+        </div>
+        <div class="front-center">
+          <div class="front-slogan">Renovări &amp;<br>Reparații Complete</div>
+        </div>
+        <div class="front-bottom">
+          <span class="front-free">Consultație și măsurare gratuită</span>
+          <span class="front-url">eunic.md</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ BACK ═══════ -->
+    <div class="card-container">
+      <div class="card-label">Verso</div>
+      <div class="card card-back">
+        <div class="back-content">
+          <div class="back-left">
+
+            <!-- Services -->
+            <div>
+              <div class="section-heading">Servicii</div>
+              <div class="services-list">
+                <span class="service-pill">Renovări interioare</span>
+                <span class="service-pill">Instalații sanitare</span>
+                <span class="service-pill">Instalații electrice</span>
+                <span class="service-pill">Montaj mobilă</span>
+                <span class="service-pill">Acoperiș &amp; Fațade</span>
+                <span class="service-pill">Mici reparații casnice</span>
+              </div>
+            </div>
+
+            <!-- Phones -->
+            <div>
+              <div class="section-heading">Telefon</div>
+              <div class="phones">
+                <div class="phone-row">
+                  <span class="gradient-icon">
+                    <svg viewBox="0 0 20 20" fill="none">
+                      <defs>
+                        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                          <stop offset="0%" stop-color="#1a47b8"/>
+                          <stop offset="100%" stop-color="#7c3aed"/>
+                        </linearGradient>
+                      </defs>
+                      <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h2.88a1 1 0 0 1 .95.68l1.12 3.35a1 1 0 0 1-.27 1.03l-1.38 1.26a11.04 11.04 0 0 0 5.38 5.38l1.26-1.38a1 1 0 0 1 1.03-.27l3.35 1.12a1 1 0 0 1 .68.95v2.88A1.5 1.5 0 0 1 17 18.5 14.5 14.5 0 0 1 2 3.5Z" fill="url(#g1)"/>
+                    </svg>
+                  </span>
+                  0768 440 083
+                </div>
+                <div class="phone-row">
+                  <span class="gradient-icon">
+                    <svg viewBox="0 0 20 20" fill="none">
+                      <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h2.88a1 1 0 0 1 .95.68l1.12 3.35a1 1 0 0 1-.27 1.03l-1.38 1.26a11.04 11.04 0 0 0 5.38 5.38l1.26-1.38a1 1 0 0 1 1.03-.27l3.35 1.12a1 1 0 0 1 .68.95v2.88A1.5 1.5 0 0 1 17 18.5 14.5 14.5 0 0 1 2 3.5Z" fill="url(#g1)"/>
+                    </svg>
+                  </span>
+                  0760 842 223
+                </div>
+              </div>
+            </div>
+
+            <!-- Address & Schedule -->
+            <div>
+              <div class="section-heading">Info</div>
+              <div class="contact-block">
+                <div class="info-row">
+                  <span class="gradient-icon">
+                    <svg viewBox="0 0 20 20" fill="none">
+                      <path d="M10 2a6 6 0 0 0-6 6c0 4.5 6 10 6 10s6-5.5 6-10a6 6 0 0 0-6-6Zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z" fill="url(#g1)"/>
+                    </svg>
+                  </span>
+                  mun. Bălți, Moldova
+                </div>
+                <div class="info-row">
+                  <span class="gradient-icon">
+                    <svg viewBox="0 0 20 20" fill="none">
+                      <path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm.5-9H9v4.5l3.5 2.1.8-1.2-3-1.8V7Z" fill="url(#g1)"/>
+                    </svg>
+                  </span>
+                  L-V 08:00–18:00 / S 09:00–15:00
+                </div>
+              </div>
+            </div>
+
+            <!-- Messengers -->
+            <div class="messenger-row">
+              <span class="messenger-icon">
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M23.3 8.7A10.4 10.4 0 0 0 7.6 22.1L6 26l4-1.5a10.4 10.4 0 0 0 5 1.3h0A10.4 10.4 0 0 0 23.3 8.7ZM16 24a8.6 8.6 0 0 1-4.4-1.2l-.3-.2-3.2 1.2 1.2-3.1-.2-.3A8.6 8.6 0 1 1 24.6 16 8.6 8.6 0 0 1 16 24Zm4.7-6.4c-.3-.1-1.5-.8-1.8-.9s-.4-.1-.6.1-.7.9-.8 1-.3.2-.6 0a7.7 7.7 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.6a.5.5 0 0 0 0-.5c-.1-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.2 5.2 0 0 0 1.7.6 4 4 0 0 0 1.9-.1 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3Z" fill="#fff"/></svg>
+              </span>
+              <span class="messenger-icon">
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#7360F2"/><path d="M23.5 10.2a12.5 12.5 0 0 0-5.1-3.1c-1.2-.3-3.3-.3-4.6 0a12.2 12.2 0 0 0-4.8 2.9c-1.2 1.2-1.7 2.2-2 3.7a8 8 0 0 0 .5 5l-.4 1.3c-.4 1.4-.8 2.7-.7 2.8s1.4-.3 2.8-.7l1.3-.5a10 10 0 0 0 3.3.8c2.5.2 4.6-.3 6.5-1.5a9.5 9.5 0 0 0 3.6-5 7.8 7.8 0 0 0-.4-5.7ZM21.8 18a7.4 7.4 0 0 1-1.5 1.7c-.4.3-.5.3-1 .2a14.4 14.4 0 0 1-4.8-2.7 15.3 15.3 0 0 1-2.7-3.2c-.4-.6-.6-1-.5-1.3A7.4 7.4 0 0 1 13 11c.3-.2.4-.2.6-.1l.8 1.8c.2.5.4.9.3 1s-.3.4-.4.5-.2.3-.1.5a9.8 9.8 0 0 0 1.7 2.1 8.8 8.8 0 0 0 2.3 1.5c.2.1.3.1.5 0s.3-.4.5-.6.3-.3.5-.2l1.8.8c.3.2.5.3.5.4a2.2 2.2 0 0 1-.2 1.3Z" fill="#fff"/><path d="M17 11.5a4.8 4.8 0 0 1 2.8 1.5 4.8 4.8 0 0 1 .9 2.3.4.4 0 0 0 .7 0 5.4 5.4 0 0 0-1.1-2.8A5.5 5.5 0 0 0 17 11a.4.4 0 0 0 0 .7Z" fill="#fff"/></svg>
+              </span>
+              <span class="messenger-icon">
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#26A5E4"/><path d="M22.8 9.5l-2.8 14c-.2.9-.8 1.1-1.5.7l-4.2-3.1-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.5-.5-.2l-9.7 6.1-4.1-1.3c-.9-.3-.9-.9.2-1.3l16.2-6.2c.7-.3 1.4.2 1.2 1.3Z" fill="#fff"/></svg>
+              </span>
+            </div>
+
+          </div>
+
+          <!-- Right column: QR -->
+          <div class="back-right">
+            <div class="qr-wrapper">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://eunic.md" alt="QR eunic.md" class="qr-code">
+              <span class="qr-label">eunic.md</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

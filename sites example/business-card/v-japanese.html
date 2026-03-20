@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eunic-Invest — Japanese Zen / Wabi-Sabi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500&family=Noto+Serif:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f5f0e8;
+      --charcoal: #2d2d2d;
+      --red: #c0392b;
+      --brown: #8b7355;
+      --body-bg: #d8d3ca;
+      --card-w: 800px;
+      --card-h: 480px;
+      --card-radius: 6px;
+      --serif: 'Noto Serif', 'Georgia', serif;
+      --sans: 'Noto Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: var(--body-bg);
+      font-family: var(--sans);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 84px 28px;
+      gap: 67px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      color: var(--charcoal);
+    }
+
+    /* ── Page title ── */
+    .page-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--brown);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    /* ── Cards wrapper ── */
+    .cards-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 67px;
+    }
+    @media (min-width: 1800px) {
+      .cards-wrapper {
+        flex-direction: row;
+        gap: 112px;
+        align-items: flex-start;
+      }
+    }
+
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-label {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--brown);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    /* ── Card shell ── */
+    .card {
+      width: var(--card-w);
+      height: var(--card-h);
+      background: var(--cream);
+      border-radius: var(--card-radius);
+      box-shadow:
+        0 1px 3px rgba(45, 45, 45, 0.06),
+        0 4px 12px rgba(45, 45, 45, 0.08),
+        0 12px 32px rgba(45, 45, 45, 0.05);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ═══════════════════════════════════════
+       FRONT (FAȚĂ)
+       Maximum emptiness. Breathing space.
+    ═══════════════════════════════════════ */
+    .front {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 67px 45px;
+      text-align: center;
+    }
+
+    .front-logo {
+      width: 101px;
+      height: auto;
+      margin-bottom: 28px;
+      opacity: 0.92;
+    }
+
+    .front-company {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 30px;
+      color: var(--charcoal);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .front-slogan {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--brown);
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+
+    /* Spacer to push hanko mark & badges down */
+    .front-spacer {
+      flex: 1;
+    }
+
+    /* Hanko/seal red line */
+    .front-hanko {
+      width: 56px;
+      height: 3px;
+      background: var(--red);
+      border-radius: 1.5px;
+      margin-bottom: 20px;
+    }
+
+    .front-badges {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .front-badges span {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 11px;
+      color: var(--brown);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    .front-badges .dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--brown);
+      opacity: 0.3;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════
+       BACK (VERSO)
+       Asymmetric. Vertical red divider at ~60%.
+    ═══════════════════════════════════════ */
+    .back {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      height: 100%;
+      padding: 0;
+    }
+
+    /* Left column */
+    .back-left {
+      padding: 42px 28px 31px 50px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Vertical red divider */
+    .back-divider {
+      width: 1px;
+      background: var(--red);
+      opacity: 0.55;
+      margin: 39px 0;
+    }
+
+    /* Right column */
+    .back-right {
+      padding: 42px 45px 31px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Left: Services ── */
+    .back-services {
+      list-style: none;
+      margin-bottom: auto;
+    }
+
+    .back-services li {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--charcoal);
+      letter-spacing: 0.7px;
+      line-height: 1;
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .back-services li + li::before {
+      content: '';
+      display: none;
+    }
+
+    .back-services .svc-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--brown);
+      opacity: 0.4;
+      flex-shrink: 0;
+    }
+
+    /* ── Left: Phones ── */
+    .back-phones {
+      margin-top: 17px;
+      margin-bottom: 17px;
+    }
+
+    .back-phones a {
+      display: block;
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--charcoal);
+      text-decoration: none;
+      letter-spacing: 1.1px;
+      line-height: 1.7;
+    }
+
+    /* ── Left: Meta (address, schedule) ── */
+    .back-meta {
+      margin-top: auto;
+    }
+
+    .back-meta p {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 11px;
+      color: var(--brown);
+      letter-spacing: 0.7px;
+      line-height: 1.65;
+    }
+
+    /* ── Left: Messenger icons ── */
+    .back-messengers {
+      display: flex;
+      gap: 8px;
+      margin-top: 11px;
+    }
+
+    .back-messengers a {
+      display: block;
+      width: 22px;
+      height: 22px;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .back-messengers a:hover {
+      opacity: 1;
+    }
+
+    .back-messengers svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── Right: QR ── */
+    .back-qr {
+      width: 112px;
+      height: 112px;
+      margin-bottom: 14px;
+      opacity: 0.88;
+    }
+
+    .back-url {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--charcoal);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .back-free {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: italic;
+      font-size: 11px;
+      color: var(--brown);
+      letter-spacing: 0.4px;
+      text-align: center;
+      max-width: 168px;
+      line-height: 1.5;
+      opacity: 0.75;
+    }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE — stack on narrow screens
+    ═══════════════════════════════════════ */
+    @media (max-width: 860px) {
+      :root {
+        --card-w: 92vw;
+        --card-h: auto;
+      }
+      .card {
+        min-height: 400px;
+        aspect-ratio: 5 / 3;
+      }
+      .front {
+        padding: 39px 39px 31px;
+      }
+      .front-logo { width: 78px; margin-bottom: 20px; }
+      .front-company { font-size: 25px; }
+      .front-slogan { font-size: 11px; }
+      .front-hanko { margin-bottom: 14px; }
+      .front-badges span { font-size: 9px; }
+
+      .back-left { padding: 31px 20px 22px 34px; }
+      .back-right { padding: 31px 28px 22px 20px; }
+      .back-services li { font-size: 10px; padding: 4px 0; }
+      .back-phones a { font-size: 12px; }
+      .back-meta p { font-size: 10px; }
+      .back-qr { width: 90px; height: 90px; }
+      .back-url { font-size: 12px; }
+      .back-free { font-size: 10px; }
+      .back-messengers a { width: 20px; height: 20px; }
+    }
+
+    /* ═══════════════════════════════════════
+       PRINT — 85 × 55 mm
+    ═══════════════════════════════════════ */
+    @media print {
+      @page {
+        size: 170mm 55mm;
+        margin: 0;
+      }
+
+      body {
+        background: none;
+        padding: 0;
+        gap: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        min-height: auto;
+      }
+
+      .page-title { display: none; }
+
+      .cards-wrapper {
+        flex-direction: row;
+        gap: 0;
+        align-items: flex-start;
+      }
+
+      .card-container { align-items: flex-start; }
+      .card-label { display: none; }
+
+      .card {
+        width: 85mm;
+        height: 55mm;
+        border-radius: 0;
+        box-shadow: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .back-messengers a { opacity: 0.7; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">Japanese Zen &middot; Wabi-Sabi</div>
+
+  <div class="cards-wrapper">
+
+    <!-- ════════════ FRONT (Față) ════════════ -->
+    <div class="card-container">
+      <div class="card-label">Față</div>
+      <div class="card front">
+        <img class="front-logo" src="../../logo.png" alt="Eunic-Invest logo">
+        <div class="front-company">Eunic-Invest</div>
+        <div class="front-slogan">Renovări &amp; Reparații Complete</div>
+        <div class="front-spacer"></div>
+        <div class="front-hanko"></div>
+        <div class="front-badges">
+          <span>Experiență</span>
+          <div class="dot"></div>
+          <span>Calitate</span>
+          <div class="dot"></div>
+          <span>Prețuri corecte</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ BACK (Verso) ════════════ -->
+    <div class="card-container">
+      <div class="card-label">Verso</div>
+      <div class="card back">
+
+        <!-- Left column -->
+        <div class="back-left">
+          <ul class="back-services">
+            <li><span class="svc-dot"></span>Renovări interioare</li>
+            <li><span class="svc-dot"></span>Instalații sanitare</li>
+            <li><span class="svc-dot"></span>Instalații electrice</li>
+            <li><span class="svc-dot"></span>Montaj mobilă</li>
+            <li><span class="svc-dot"></span>Acoperiș &amp; Fațade</li>
+            <li><span class="svc-dot"></span>Mici reparații casnice</li>
+          </ul>
+
+          <div class="back-phones">
+            <a href="tel:+37376844083">0768 440 083</a>
+            <a href="tel:+37376084223">0760 842 223</a>
+          </div>
+
+          <div class="back-meta">
+            <p>mun. Bălți, Moldova</p>
+            <p>L-V 08:00–18:00 / S 09:00–15:00</p>
+          </div>
+
+          <div class="back-messengers">
+            <a href="https://wa.me/37376844083" aria-label="WhatsApp">
+              <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M23.3 8.7A10.4 10.4 0 0 0 7.6 22.1L6 26l4-1.5a10.4 10.4 0 0 0 5 1.3h0A10.4 10.4 0 0 0 23.3 8.7ZM16 24a8.6 8.6 0 0 1-4.4-1.2l-.3-.2-3.2 1.2 1.2-3.1-.2-.3A8.6 8.6 0 1 1 24.6 16 8.6 8.6 0 0 1 16 24Zm4.7-6.4c-.3-.1-1.5-.8-1.8-.9s-.4-.1-.6.1-.7.9-.8 1-.3.2-.6 0a7.7 7.7 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.6a.5.5 0 0 0 0-.5c-.1-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.2 5.2 0 0 0 1.7.6 4 4 0 0 0 1.9-.1 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3Z" fill="#fff"/></svg>
+            </a>
+            <a href="viber://chat?number=37376844083" aria-label="Viber">
+              <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#7360F2"/><path d="M23.5 10.2a12.5 12.5 0 0 0-5.1-3.1c-1.2-.3-3.3-.3-4.6 0a12.2 12.2 0 0 0-4.8 2.9c-1.2 1.2-1.7 2.2-2 3.7a8 8 0 0 0 .5 5l-.4 1.3c-.4 1.4-.8 2.7-.7 2.8s1.4-.3 2.8-.7l1.3-.5a10 10 0 0 0 3.3.8c2.5.2 4.6-.3 6.5-1.5a9.5 9.5 0 0 0 3.6-5 7.8 7.8 0 0 0-.4-5.7ZM21.8 18a7.4 7.4 0 0 1-1.5 1.7c-.4.3-.5.3-1 .2a14.4 14.4 0 0 1-4.8-2.7 15.3 15.3 0 0 1-2.7-3.2c-.4-.6-.6-1-.5-1.3A7.4 7.4 0 0 1 13 11c.3-.2.4-.2.6-.1l.8 1.8c.2.5.4.9.3 1s-.3.4-.4.5-.2.3-.1.5a9.8 9.8 0 0 0 1.7 2.1 8.8 8.8 0 0 0 2.3 1.5c.2.1.3.1.5 0s.3-.4.5-.6.3-.3.5-.2l1.8.8c.3.2.5.3.5.4a2.2 2.2 0 0 1-.2 1.3Z" fill="#fff"/><path d="M17 11.5a4.8 4.8 0 0 1 2.8 1.5 4.8 4.8 0 0 1 .9 2.3.4.4 0 0 0 .7 0 5.4 5.4 0 0 0-1.1-2.8A5.5 5.5 0 0 0 17 11a.4.4 0 0 0 0 .7Z" fill="#fff"/></svg>
+            </a>
+            <a href="https://t.me/+37376844083" aria-label="Telegram">
+              <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#26A5E4"/><path d="M22.8 9.5l-2.8 14c-.2.9-.8 1.1-1.5.7l-4.2-3.1-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.5-.5-.2l-9.7 6.1-4.1-1.3c-.9-.3-.9-.9.2-1.3l16.2-6.2c.7-.3 1.4.2 1.2 1.3Z" fill="#fff"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Vertical red divider -->
+        <div class="back-divider"></div>
+
+        <!-- Right column -->
+        <div class="back-right">
+          <img class="back-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://eunic.md&color=2d2d2d" alt="QR eunic.md">
+          <div class="back-url">eunic.md</div>
+          <div class="back-free">Consultație și măsurare gratuită</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

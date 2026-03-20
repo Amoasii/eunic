@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eunic-Invest — Carte de vizită</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #1a47b8;
+      --blue-light: #2563eb;
+      --red: #dc2626;
+      --gold: #f59e0b;
+      --gold-light: #fbbf24;
+      --dark: #1e293b;
+      --card-w: 360px;
+      --card-h: 216px;
+    }
+
+    body {
+      background: #e2e2e2;
+      font-family: 'Open Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 20px;
+      gap: 48px;
+      min-height: 100vh;
+    }
+
+    .page-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: #444;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .cards-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+    }
+    @media (min-width: 820px) {
+      .cards-wrapper { flex-direction: row; gap: 56px; }
+    }
+
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    /* ── Card shell ── */
+    .card {
+      width: var(--card-w);
+      height: var(--card-h);
+      min-height: var(--card-h);
+      max-height: var(--card-h);
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════
+       FRONT
+       ══════════════════════════════════════════ */
+    .front {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Swoosh arcs (top-right, like flyer) ── */
+    .front .arcs {
+      position: absolute;
+      top: -28px;
+      right: -16px;
+      width: 170px;
+      height: 170px;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .front .arcs .a {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .front .arcs .a1 {
+      width: 160px; height: 160px;
+      top: 0; right: 0;
+      border: 5px solid var(--blue);
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      transform: rotate(-12deg);
+    }
+    .front .arcs .a2 {
+      width: 134px; height: 134px;
+      top: 10px; right: 8px;
+      border: 4px solid var(--gold);
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      transform: rotate(-18deg);
+    }
+    .front .arcs .a3 {
+      width: 110px; height: 110px;
+      top: 22px; right: 14px;
+      border: 4px solid var(--red);
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      transform: rotate(-22deg);
+    }
+
+    /* ── Top: big heading ── */
+    .front-top {
+      padding: 14px 16px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .front-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 16px;
+      line-height: 1.05;
+      color: var(--blue);
+      text-transform: uppercase;
+    }
+    .front-heading .amp {
+      color: var(--gold);
+      font-size: 13px;
+    }
+    .front-heading .line2 {
+      color: var(--blue);
+    }
+    .front-heading .complete {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: var(--dark);
+      margin-top: 1px;
+    }
+
+    /* ── Middle: logo + badges ── */
+    .front-mid {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .front-logo {
+      flex-shrink: 0;
+    }
+    .front-logo img {
+      width: 110px;
+      height: auto;
+      display: block;
+    }
+
+    .front-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .badge {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 8.5px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 3px;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    }
+    .badge-gold { background: linear-gradient(135deg, #e8930a, var(--gold-light)); }
+    .badge-blue { background: linear-gradient(135deg, var(--blue), var(--blue-light)); }
+
+    /* ── Bottom bar ── */
+    .front-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .free-consult {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 6px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .front-url {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 8px;
+      color: var(--blue);
+      letter-spacing: 1px;
+    }
+
+    /* ── Tricolor stripe ── */
+    .tricolor {
+      height: 5px;
+      flex-shrink: 0;
+      display: flex;
+    }
+    .tricolor .tc-blue { flex: 1; background: var(--blue); }
+    .tricolor .tc-gold { flex: 1; background: var(--gold); }
+    .tricolor .tc-red  { flex: 1; background: var(--red); }
+
+    /* ══════════════════════════════════════════
+       BACK
+       ══════════════════════════════════════════ */
+    .back {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Top bar with logo ── */
+    .back-bar {
+      height: 28px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .back-bar img {
+      height: 20px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+
+    /* ── Body ── */
+    .back-body {
+      flex: 1;
+      display: flex;
+      padding: 8px 12px 6px;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    /* Left column */
+    .back-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+    }
+
+    /* Services */
+    .svc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5px;
+    }
+    .svc-list li {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 7px;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .svc-check {
+      width: 10px;
+      height: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Phones */
+    .phones {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-top: 6px;
+    }
+    .ph {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      width: fit-content;
+    }
+    .ph-blue { background: var(--blue); }
+    .ph-red  { background: var(--red); }
+    .ph svg {
+      width: 9px;
+      height: 9px;
+      flex-shrink: 0;
+    }
+    .ph span {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 8.5px;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    /* Info row */
+    .info-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 4px;
+    }
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 6.5px;
+      color: #64748b;
+    }
+    .info-item .ii { font-size: 8px; }
+
+    /* Messengers */
+    .msgs {
+      display: flex;
+      gap: 5px;
+      margin-top: 4px;
+      align-items: center;
+    }
+    .msgs svg {
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+
+    /* Right column */
+    .back-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      gap: 5px;
+    }
+
+    .qr-frame {
+      width: 76px;
+      height: 76px;
+      padding: 4px;
+      border: 2px solid var(--blue);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .qr-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 9px;
+      color: var(--blue);
+      letter-spacing: 1px;
+    }
+
+    .scan-hint {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 5.5px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: #fff; padding: 10mm; }
+      .card {
+        box-shadow: none;
+        border: .5px solid #ccc;
+        width: 85mm; height: 55mm;
+        min-height: 55mm; max-height: 55mm;
+        page-break-inside: avoid;
+      }
+      .page-title, .card-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<h1 class="page-title">Carte de vizită</h1>
+
+<div class="cards-wrapper">
+
+  <!-- ════ FRONT ════ -->
+  <div class="card-container">
+    <div class="card-label">Față</div>
+    <div class="card front">
+
+      <div class="arcs">
+        <div class="a a1"></div>
+        <div class="a a2"></div>
+        <div class="a a3"></div>
+      </div>
+
+      <div class="front-top">
+        <div class="front-heading">
+          Renovări <span class="amp">&</span>
+          <span class="line2">Reparații</span><br>
+          <span class="complete">Complete</span>
+        </div>
+      </div>
+
+      <div class="front-mid">
+        <div class="front-logo">
+          <img src="../../logo.png" alt="Eunic-Invest">
+        </div>
+        <div class="front-badges">
+          <div class="badge badge-gold">Experiență</div>
+          <div class="badge badge-gold">Calitate</div>
+          <div class="badge badge-blue">Prețuri corecte</div>
+        </div>
+      </div>
+
+      <div class="front-bottom">
+        <div class="free-consult">Consultație și măsurare gratuită</div>
+        <div class="front-url">eunic.md</div>
+      </div>
+
+      <div class="tricolor">
+        <div class="tc-blue"></div>
+        <div class="tc-gold"></div>
+        <div class="tc-red"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ BACK ════ -->
+  <div class="card-container">
+    <div class="card-label">Verso</div>
+    <div class="card back">
+
+      <div class="back-bar">
+        <img src="../../logo.png" alt="Eunic-Invest">
+      </div>
+
+      <div class="back-body">
+        <div class="back-left">
+
+          <ul class="svc-list">
+            <li>
+              <svg class="svc-check" viewBox="0 0 16 16"><rect width="16" height="16" rx="3" fill="#1a47b8"/><path d="M4 8.2L6.8 11 12 5.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Renovări interioare
+            </li>
+            <li>
+              <svg class="svc-check" viewBox="0 0 16 16"><rect width="16" height="16" rx="3" fill="#1a47b8"/><path d="M4 8.2L6.8 11 12 5.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Instalații sanitare
+            </li>
+            <li>
+              <svg class="svc-check" viewBox="0 0 16 16"><rect width="16" height="16" rx="3" fill="#1a47b8"/><path d="M4 8.2L6.8 11 12 5.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Instalații electrice
+            </li>
+            <li>
+              <svg class="svc-check" viewBox="0 0 16 16"><rect width="16" height="16" rx="3" fill="#1a47b8"/><path d="M4 8.2L6.8 11 12 5.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Montaj mobilă
+            </li>
+            <li>
+              <svg class="svc-check" viewBox="0 0 16 16"><rect width="16" height="16" rx="3" fill="#1a47b8"/><path d="M4 8.2L6.8 11 12 5.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Acoperiș & Fațade
+            </li>
+            <li>
+              <svg class="svc-check" viewBox="0 0 16 16"><rect width="16" height="16" rx="3" fill="#1a47b8"/><path d="M4 8.2L6.8 11 12 5.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Mici reparații casnice
+            </li>
+          </ul>
+
+          <div>
+            <div class="phones">
+              <div class="ph ph-blue">
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3.6 1.4C4 1 4.7 1 5.1 1.4l1.8 1.8c.4.4.4 1 0 1.4L5.8 5.8c-.1.1-.1.3 0 .5a10.5 10.5 0 0 0 3.9 3.9c.2.1.4.1.5 0l1.2-1.1c.4-.4 1-.4 1.4 0l1.8 1.8c.4.4.4 1.1 0 1.5l-1 1c-.8.8-2 1.1-3.1.7A14.5 14.5 0 0 1 3 6.5c-.4-1.1-.1-2.3.7-3.1l1-1Z" fill="#fbbf24"/></svg>
+                <span>0768 440 083</span>
+              </div>
+              <div class="ph ph-red">
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3.6 1.4C4 1 4.7 1 5.1 1.4l1.8 1.8c.4.4.4 1 0 1.4L5.8 5.8c-.1.1-.1.3 0 .5a10.5 10.5 0 0 0 3.9 3.9c.2.1.4.1.5 0l1.2-1.1c.4-.4 1-.4 1.4 0l1.8 1.8c.4.4.4 1.1 0 1.5l-1 1c-.8.8-2 1.1-3.1.7A14.5 14.5 0 0 1 3 6.5c-.4-1.1-.1-2.3.7-3.1l1-1Z" fill="#fbbf24"/></svg>
+                <span>0760 842 223</span>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-item"><span class="ii">📍</span> mun. Bălți</div>
+              <div class="info-item"><span class="ii">🕐</span> L-V 08–18 / S 09–15</div>
+            </div>
+
+            <div class="msgs">
+              <div title="WhatsApp">
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M23.3 8.7A10.4 10.4 0 0 0 7.6 22.1L6 26l4-1.5a10.4 10.4 0 0 0 5 1.3h0A10.4 10.4 0 0 0 23.3 8.7ZM16 24a8.6 8.6 0 0 1-4.4-1.2l-.3-.2-3.2 1.2 1.2-3.1-.2-.3A8.6 8.6 0 1 1 24.6 16 8.6 8.6 0 0 1 16 24Zm4.7-6.4c-.3-.1-1.5-.8-1.8-.9s-.4-.1-.6.1-.7.9-.8 1-.3.2-.6 0a7.7 7.7 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.6a.5.5 0 0 0 0-.5c-.1-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.2 5.2 0 0 0 1.7.6 4 4 0 0 0 1.9-.1 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3Z" fill="#fff"/></svg>
+              </div>
+              <div title="Viber">
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#7360F2"/><path d="M23.5 10.2a12.5 12.5 0 0 0-5.1-3.1c-1.2-.3-3.3-.3-4.6 0a12.2 12.2 0 0 0-4.8 2.9c-1.2 1.2-1.7 2.2-2 3.7a8 8 0 0 0 .5 5l-.4 1.3c-.4 1.4-.8 2.7-.7 2.8s1.4-.3 2.8-.7l1.3-.5a10 10 0 0 0 3.3.8c2.5.2 4.6-.3 6.5-1.5a9.5 9.5 0 0 0 3.6-5 7.8 7.8 0 0 0-.4-5.7ZM21.8 18a7.4 7.4 0 0 1-1.5 1.7c-.4.3-.5.3-1 .2a14.4 14.4 0 0 1-4.8-2.7 15.3 15.3 0 0 1-2.7-3.2c-.4-.6-.6-1-.5-1.3A7.4 7.4 0 0 1 13 11c.3-.2.4-.2.6-.1l.8 1.8c.2.5.4.9.3 1s-.3.4-.4.5-.2.3-.1.5a9.8 9.8 0 0 0 1.7 2.1 8.8 8.8 0 0 0 2.3 1.5c.2.1.3.1.5 0s.3-.4.5-.6.3-.3.5-.2l1.8.8c.3.2.5.3.5.4a2.2 2.2 0 0 1-.2 1.3Z" fill="#fff"/><path d="M17 11.5a4.8 4.8 0 0 1 2.8 1.5 4.8 4.8 0 0 1 .9 2.3.4.4 0 0 0 .7 0 5.4 5.4 0 0 0-1.1-2.8A5.5 5.5 0 0 0 17 11a.4.4 0 0 0 0 .7Z" fill="#fff"/></svg>
+              </div>
+              <div title="Telegram">
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#26A5E4"/><path d="M22.8 9.5l-2.8 14c-.2.9-.8 1.1-1.5.7l-4.2-3.1-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.5-.5-.2l-9.7 6.1-4.1-1.3c-.9-.3-.9-.9.2-1.3l16.2-6.2c.7-.3 1.4.2 1.2 1.3Z" fill="#fff"/></svg>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="back-right">
+          <div class="scan-hint">Scanează</div>
+          <div class="qr-frame">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://eunic.md&color=1a47b8" alt="QR — eunic.md">
+          </div>
+          <div class="qr-text">eunic.md</div>
+        </div>
+
+      </div>
+
+      <div class="tricolor">
+        <div class="tc-blue"></div>
+        <div class="tc-gold"></div>
+        <div class="tc-red"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

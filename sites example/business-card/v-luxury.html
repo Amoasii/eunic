@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eunic-Invest — Dark Luxury</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #0a0a0a;
+      --bg-body: #111111;
+      --gold: #d4a853;
+      --gold-light: #f0d78c;
+      --gold-muted: rgba(212, 168, 83, 0.55);
+      --warm-gray: #1a1a1a;
+      --text-muted: #888878;
+      --card-w: 800px;
+      --card-h: 480px;
+      --card-radius: 8px;
+      --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: var(--bg-body);
+      font-family: var(--font-sans);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 90px 28px;
+      gap: 67px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      color: var(--gold);
+    }
+
+    /* ── Page title ── */
+    .page-title {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: 19px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 7px;
+    }
+
+    /* ── Cards wrapper ── */
+    .cards-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 67px;
+    }
+    @media (min-width: 1800px) {
+      .cards-wrapper {
+        flex-direction: row;
+        gap: 100px;
+        align-items: flex-start;
+      }
+    }
+
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-label {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--gold-muted);
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      margin-bottom: 20px;
+    }
+
+    /* ── Card shell ── */
+    .card {
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: var(--card-radius);
+      background: var(--black);
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.5),
+        0 12px 40px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(212, 168, 83, 0.08);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Responsive card scaling ── */
+    @media (max-width: 860px) {
+      :root {
+        --card-w: 92vw;
+        --card-h: calc(92vw * 0.6);
+      }
+    }
+
+    /* ══════════════════════════════════════
+       FRONT (Față)
+       ══════════════════════════════════════ */
+    .card-front {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      position: relative;
+    }
+
+    /* Gold inset border frame */
+    .card-front::before {
+      content: '';
+      position: absolute;
+      top: 17px;
+      left: 17px;
+      right: 17px;
+      bottom: 17px;
+      border: 1px solid rgba(212, 168, 83, 0.3);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    /* Corner accents */
+    .card-front::after {
+      content: '';
+      position: absolute;
+      top: 11px;
+      left: 11px;
+      right: 11px;
+      bottom: 11px;
+      pointer-events: none;
+      background:
+        linear-gradient(var(--gold), var(--gold)) top left,
+        linear-gradient(var(--gold), var(--gold)) top right,
+        linear-gradient(var(--gold), var(--gold)) bottom left,
+        linear-gradient(var(--gold), var(--gold)) bottom right;
+      background-size: 22px 1px, 22px 1px, 22px 1px, 22px 1px;
+      background-repeat: no-repeat;
+      background-position: top left, top right, bottom left, bottom right;
+      opacity: 0.25;
+    }
+
+    .front-logo {
+      width: 115px;
+      height: auto;
+      margin-bottom: 22px;
+      filter: drop-shadow(0 0 20px rgba(212, 168, 83, 0.3)) drop-shadow(0 0 40px rgba(212, 168, 83, 0.1));
+    }
+
+    .front-slogan {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    .front-badges {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 31px;
+    }
+
+    .front-badge {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 6px 17px;
+      border: 1px solid rgba(212, 168, 83, 0.35);
+      border-radius: 20px;
+    }
+
+    .front-url {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--gold-muted);
+      letter-spacing: 4px;
+      text-transform: lowercase;
+      font-variant: small-caps;
+      position: absolute;
+      bottom: 28px;
+    }
+
+    /* ══════════════════════════════════════
+       BACK (Verso)
+       ══════════════════════════════════════ */
+    .card-back {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr auto;
+      height: 100%;
+      padding: 31px 34px 25px;
+      gap: 0;
+    }
+
+    /* ── Header row: company name + free text ── */
+    .back-header {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(212, 168, 83, 0.2);
+      margin-bottom: 17px;
+    }
+
+    .back-company {
+      font-family: var(--font-serif);
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+    }
+
+    .back-free-text {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gold-muted);
+      letter-spacing: 0.7px;
+      font-style: italic;
+    }
+
+    /* ── Left column: services + phones ── */
+    .back-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-right: 22px;
+    }
+
+    .back-services-title {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 11px;
+    }
+
+    .back-services {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 20px;
+      margin-bottom: 17px;
+    }
+
+    .back-service {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(240, 215, 140, 0.8);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      line-height: 1.5;
+    }
+
+    .back-service::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+      position: relative;
+      top: -1px;
+    }
+
+    /* Divider before phones */
+    .back-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(212, 168, 83, 0.15);
+      margin: 11px 0;
+    }
+
+    .back-phones {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .back-phone {
+      font-family: var(--font-sans);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+    }
+
+    .back-messengers {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .back-messengers svg {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+    }
+
+    /* ── Right column: QR + info ── */
+    .back-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 22px;
+      border-left: 1px solid rgba(212, 168, 83, 0.15);
+    }
+
+    .back-qr-wrap {
+      padding: 7px;
+      border: 1px solid rgba(212, 168, 83, 0.3);
+      border-radius: 4px;
+      line-height: 0;
+    }
+
+    .back-qr-wrap img {
+      width: 112px;
+      height: 112px;
+      display: block;
+      border-radius: 2px;
+    }
+
+    .back-qr-label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--gold-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .back-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: auto;
+    }
+
+    .back-address,
+    .back-schedule {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--gold-muted);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .back-schedule {
+      font-size: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ══════════════════════════════════════
+       PRINT
+       ══════════════════════════════════════ */
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+        gap: 10mm;
+      }
+      .page-title,
+      .card-label {
+        display: none;
+      }
+      .cards-wrapper {
+        flex-direction: column;
+        gap: 10mm;
+      }
+      .card {
+        width: 85mm;
+        height: 55mm;
+        box-shadow: none;
+        border: 0.5pt solid var(--gold);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .front-logo {
+        filter: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">Eunic-Invest &mdash; Dark Luxury</div>
+
+  <div class="cards-wrapper">
+
+    <!-- ════ FRONT ════ -->
+    <div class="card-container">
+      <div class="card-label">Fa&#x21B;&#x103;</div>
+      <div class="card">
+        <div class="card-front">
+          <img src="../../logo.png" alt="Eunic-Invest" class="front-logo">
+          <div class="front-slogan">Renov&#x103;ri &amp; Repara&#x21B;ii Complete</div>
+          <div class="front-badges">
+            <span class="front-badge">Experien&#x21B;&#x103;</span>
+            <span class="front-badge">Calitate</span>
+            <span class="front-badge">Pre&#x21B;uri corecte</span>
+          </div>
+          <div class="front-url">eunic.md</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ BACK ════ -->
+    <div class="card-container">
+      <div class="card-label">Verso</div>
+      <div class="card">
+        <div class="card-back">
+
+          <!-- Header -->
+          <div class="back-header">
+            <div class="back-company">Eunic-Invest</div>
+            <div class="back-free-text">Consulta&#x21B;ie &#x219;i m&#x103;surare gratuit&#x103;</div>
+          </div>
+
+          <!-- Left column -->
+          <div class="back-left">
+            <div>
+              <div class="back-services-title">Servicii</div>
+              <div class="back-services">
+                <div class="back-service">Renov&#x103;ri interioare</div>
+                <div class="back-service">Instala&#x21B;ii sanitare</div>
+                <div class="back-service">Instala&#x21B;ii electrice</div>
+                <div class="back-service">Montaj mobil&#x103;</div>
+                <div class="back-service">Acoperi&#x219; &amp; Fa&#x21B;ade</div>
+                <div class="back-service">Mici repara&#x21B;ii casnice</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="back-divider"></div>
+              <div class="back-phones">
+                <span class="back-phone">0768 440 083</span>
+                <span class="back-phone">0760 842 223</span>
+              </div>
+              <div class="back-messengers">
+                <!-- WhatsApp -->
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M23.3 8.7A10.4 10.4 0 0 0 7.6 22.1L6 26l4-1.5a10.4 10.4 0 0 0 5 1.3h0A10.4 10.4 0 0 0 23.3 8.7ZM16 24a8.6 8.6 0 0 1-4.4-1.2l-.3-.2-3.2 1.2 1.2-3.1-.2-.3A8.6 8.6 0 1 1 24.6 16 8.6 8.6 0 0 1 16 24Zm4.7-6.4c-.3-.1-1.5-.8-1.8-.9s-.4-.1-.6.1-.7.9-.8 1-.3.2-.6 0a7.7 7.7 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.6a.5.5 0 0 0 0-.5c-.1-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.2 5.2 0 0 0 1.7.6 4 4 0 0 0 1.9-.1 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3Z" fill="#fff"/></svg>
+                <!-- Viber -->
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#7360F2"/><path d="M23.5 10.2a12.5 12.5 0 0 0-5.1-3.1c-1.2-.3-3.3-.3-4.6 0a12.2 12.2 0 0 0-4.8 2.9c-1.2 1.2-1.7 2.2-2 3.7a8 8 0 0 0 .5 5l-.4 1.3c-.4 1.4-.8 2.7-.7 2.8s1.4-.3 2.8-.7l1.3-.5a10 10 0 0 0 3.3.8c2.5.2 4.6-.3 6.5-1.5a9.5 9.5 0 0 0 3.6-5 7.8 7.8 0 0 0-.4-5.7ZM21.8 18a7.4 7.4 0 0 1-1.5 1.7c-.4.3-.5.3-1 .2a14.4 14.4 0 0 1-4.8-2.7 15.3 15.3 0 0 1-2.7-3.2c-.4-.6-.6-1-.5-1.3A7.4 7.4 0 0 1 13 11c.3-.2.4-.2.6-.1l.8 1.8c.2.5.4.9.3 1s-.3.4-.4.5-.2.3-.1.5a9.8 9.8 0 0 0 1.7 2.1 8.8 8.8 0 0 0 2.3 1.5c.2.1.3.1.5 0s.3-.4.5-.6.3-.3.5-.2l1.8.8c.3.2.5.3.5.4a2.2 2.2 0 0 1-.2 1.3Z" fill="#fff"/><path d="M17 11.5a4.8 4.8 0 0 1 2.8 1.5 4.8 4.8 0 0 1 .9 2.3.4.4 0 0 0 .7 0 5.4 5.4 0 0 0-1.1-2.8A5.5 5.5 0 0 0 17 11a.4.4 0 0 0 0 .7Z" fill="#fff"/></svg>
+                <!-- Telegram -->
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#26A5E4"/><path d="M22.8 9.5l-2.8 14c-.2.9-.8 1.1-1.5.7l-4.2-3.1-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.5-.5-.2l-9.7 6.1-4.1-1.3c-.9-.3-.9-.9.2-1.3l16.2-6.2c.7-.3 1.4.2 1.2 1.3Z" fill="#fff"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column -->
+          <div class="back-right">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <div class="back-qr-wrap">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://eunic.md&color=d4a853" alt="QR eunic.md">
+              </div>
+              <div class="back-qr-label">eunic.md</div>
+            </div>
+            <div class="back-info">
+              <div class="back-address">mun. B&#x103;l&#x21B;i, Moldova</div>
+              <div class="back-schedule">L-V 08:00&#x2013;18:00 / S 09:00&#x2013;15:00</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

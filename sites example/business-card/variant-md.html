@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eunic-Invest — Carte de vizită (Moldova)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      /* Moldovan flag palette */
+      --md-blue: #003DA5;
+      --md-yellow: #FFD200;
+      --md-red: #CC092F;
+      /* Supporting */
+      --cream: #fdfaf5;
+      --dark: #1a1a2e;
+      --warm: #f5efe6;
+      --gold-dark: #c68a00;
+      --card-w: 540px;
+      --card-h: 324px;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e8e0d4 0%, #d4cec4 100%);
+      font-family: 'Open Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 20px;
+      gap: 48px;
+      min-height: 100vh;
+    }
+
+    .page-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .cards-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+    }
+    @media (min-width: 1200px) {
+      .cards-wrapper { flex-direction: row; gap: 64px; }
+    }
+
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    /* ── Card ── */
+    .card {
+      width: var(--card-w);
+      height: var(--card-h);
+      min-height: var(--card-h);
+      max-height: var(--card-h);
+      border-radius: 8px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.14), 0 3px 12px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════
+       FRONT — Moldovan flag inspired
+       ══════════════════════════════════════════ */
+    .front {
+      height: 100%;
+      display: flex;
+      background: var(--cream);
+    }
+
+    /* Left: flag stripe (blue | yellow | red) vertical */
+    .flag-stripe {
+      width: 20px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .flag-stripe .fs-blue { flex: 1; background: var(--md-blue); }
+    .flag-stripe .fs-yellow { flex: 1; background: var(--md-yellow); }
+    .flag-stripe .fs-red { flex: 1; background: var(--md-red); }
+
+    /* Main content */
+    .front-content {
+      flex: 1;
+      padding: 20px 24px 14px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Ornament top-right corner */
+    .ornament-corner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.07;
+    }
+
+    /* Moldovan cross-stitch pattern via repeating SVG */
+    .ornament-border {
+      position: absolute;
+      bottom: 44px;
+      left: 40px;
+      right: 24px;
+      height: 16px;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          var(--md-red) 0px, var(--md-red) 3px,
+          transparent 3px, transparent 5px,
+          var(--md-blue) 5px, var(--md-blue) 8px,
+          transparent 8px, transparent 10px,
+          var(--md-yellow) 10px, var(--md-yellow) 13px,
+          transparent 13px, transparent 16px
+        );
+      opacity: 0.12;
+      mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    }
+
+    /* Top section */
+    .front-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .front-logo img {
+      width: 180px;
+      height: auto;
+      display: block;
+    }
+
+    .front-text {
+      flex: 1;
+    }
+
+    .front-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      line-height: 1.1;
+      color: var(--md-blue);
+      text-transform: uppercase;
+    }
+    .front-heading .amp {
+      color: var(--md-yellow);
+      text-shadow: 0 0 0 var(--gold-dark);
+    }
+    .front-heading .complete {
+      display: block;
+      font-size: 20px;
+      letter-spacing: 6px;
+      color: var(--md-red);
+      margin-top: 1px;
+    }
+
+    /* Badges */
+    .front-badges {
+      display: flex;
+      gap: 6px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .fbadge {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      padding: 6px 14px;
+      border-radius: 3px;
+      color: #fff;
+    }
+    .fbadge-blue { background: var(--md-blue); }
+    .fbadge-gold {
+      background: linear-gradient(135deg, var(--gold-dark), var(--md-yellow));
+      color: var(--dark);
+    }
+    .fbadge-red { background: var(--md-red); }
+
+    /* Bottom */
+    .front-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .front-consult {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--md-red);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.4;
+    }
+
+    .front-url-block {
+      text-align: right;
+    }
+    .front-url {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      color: var(--md-blue);
+      letter-spacing: 2px;
+    }
+    .front-country {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* ══════════════════════════════════════════
+       BACK
+       ══════════════════════════════════════════ */
+    .back {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: var(--cream);
+    }
+
+    /* Top bar — flag horizontal */
+    .back-topbar {
+      height: 8px;
+      display: flex;
+      flex-shrink: 0;
+    }
+    .back-topbar .bt-blue { flex: 1; background: var(--md-blue); }
+    .back-topbar .bt-yellow { flex: 1; background: var(--md-yellow); }
+    .back-topbar .bt-red { flex: 1; background: var(--md-red); }
+
+    /* Header */
+    .back-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0 6px;
+      gap: 10px;
+    }
+    .back-header img {
+      height: 42px;
+      width: auto;
+    }
+    .back-header .bh-divider {
+      width: 1px;
+      height: 26px;
+      background: #d0c8bc;
+    }
+    .back-header .bh-tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--md-blue);
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+    }
+
+    /* Separator line */
+    .sep {
+      height: 1px;
+      margin: 0 16px;
+      background: linear-gradient(90deg, transparent, #d0c8bc, transparent);
+    }
+
+    /* Body */
+    .back-body {
+      flex: 1;
+      display: flex;
+      padding: 10px 18px 8px;
+      gap: 16px;
+      min-height: 0;
+    }
+
+    /* Left */
+    .back-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+    }
+
+    /* Services — two columns */
+    .svc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 16px;
+    }
+    .svc-item {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .svc-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .svc-dot.d-blue { background: var(--md-blue); }
+    .svc-dot.d-yellow { background: var(--md-yellow); }
+    .svc-dot.d-red { background: var(--md-red); }
+
+    /* Phones */
+    .back-phones {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .bph {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 2px solid;
+    }
+    .bph-1 { border-color: var(--md-blue); background: rgba(0,61,165,0.05); }
+    .bph-2 { border-color: var(--md-red); background: rgba(204,9,47,0.05); }
+    .bph svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+    .bph span {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+    .bph-1 span { color: var(--md-blue); }
+    .bph-2 span { color: var(--md-red); }
+
+    /* Info + messengers row */
+    .bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+    }
+    .info-group {
+      display: flex;
+      gap: 10px;
+    }
+    .info-bit {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #78716c;
+    }
+    .info-bit .ib-icon { font-size: 13px; }
+
+    .msgs {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .msgs svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    /* Right — QR */
+    .back-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      gap: 6px;
+    }
+
+    .qr-wrap {
+      width: 120px;
+      height: 120px;
+      padding: 6px;
+      border: 2.5px solid var(--md-blue);
+      border-radius: 6px;
+      background: #fff;
+    }
+    .qr-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .qr-url {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--md-blue);
+      letter-spacing: 1px;
+    }
+
+    .qr-hint {
+      font-size: 9px;
+      color: #a8a29e;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* Bottom flag bar */
+    .back-bottombar {
+      height: 8px;
+      display: flex;
+      flex-shrink: 0;
+    }
+    .back-bottombar .bb-blue { flex: 1; background: var(--md-blue); }
+    .back-bottombar .bb-yellow { flex: 1; background: var(--md-yellow); }
+    .back-bottombar .bb-red { flex: 1; background: var(--md-red); }
+
+    /* ── Print ── */
+    @media print {
+      body { background: #fff; padding: 10mm; }
+      .card {
+        box-shadow: none;
+        border: .5px solid #ccc;
+        width: 85mm; height: 55mm;
+        min-height: 55mm; max-height: 55mm;
+        page-break-inside: avoid;
+      }
+      .page-title, .card-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<h1 class="page-title">Varianta Moldova</h1>
+
+<div class="cards-wrapper">
+
+  <!-- ════ FRONT ════ -->
+  <div class="card-container">
+    <div class="card-label">Față</div>
+    <div class="card front">
+
+      <!-- Vertical flag stripe -->
+      <div class="flag-stripe">
+        <div class="fs-blue"></div>
+        <div class="fs-yellow"></div>
+        <div class="fs-red"></div>
+      </div>
+
+      <div class="front-content">
+
+        <!-- Ornament pattern (subtle) -->
+        <svg class="ornament-corner" viewBox="0 0 80 80" fill="none">
+          <path d="M0 0h80v80" fill="none"/>
+          <rect x="60" y="4" width="6" height="6" fill="#003DA5"/>
+          <rect x="68" y="4" width="6" height="6" fill="#CC092F"/>
+          <rect x="52" y="4" width="6" height="6" fill="#FFD200"/>
+          <rect x="60" y="12" width="6" height="6" fill="#FFD200"/>
+          <rect x="68" y="12" width="6" height="6" fill="#003DA5"/>
+          <rect x="52" y="12" width="6" height="6" fill="#CC092F"/>
+          <rect x="60" y="20" width="6" height="6" fill="#CC092F"/>
+          <rect x="68" y="20" width="6" height="6" fill="#FFD200"/>
+          <rect x="72" y="28" width="6" height="6" fill="#003DA5"/>
+          <rect x="72" y="36" width="6" height="6" fill="#CC092F"/>
+          <rect x="72" y="44" width="6" height="6" fill="#FFD200"/>
+          <rect x="64" y="28" width="6" height="6" fill="#FFD200"/>
+          <rect x="64" y="36" width="6" height="6" fill="#003DA5"/>
+        </svg>
+
+        <div class="ornament-border"></div>
+
+        <div class="front-top">
+          <div class="front-logo">
+            <img src="../../logo.png" alt="Eunic-Invest">
+          </div>
+          <div class="front-text">
+            <div class="front-heading">
+              Renovări <span class="amp">&</span> Reparații<br>
+              <span class="complete">Complete</span>
+            </div>
+            <div class="front-badges">
+              <div class="fbadge fbadge-blue">Experiență</div>
+              <div class="fbadge fbadge-gold">Calitate</div>
+              <div class="fbadge fbadge-red">Prețuri corecte</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="front-bottom">
+          <div class="front-consult">Consultație și măsurare<br>gratuită</div>
+          <div class="front-url-block">
+            <div class="front-url">eunic.md</div>
+            <div class="front-country">Republica Moldova</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ BACK ════ -->
+  <div class="card-container">
+    <div class="card-label">Verso</div>
+    <div class="card back">
+
+      <div class="back-topbar">
+        <div class="bt-blue"></div>
+        <div class="bt-yellow"></div>
+        <div class="bt-red"></div>
+      </div>
+
+      <div class="back-header">
+        <img src="../../logo.png" alt="Eunic-Invest">
+        <div class="bh-divider"></div>
+        <div class="bh-tagline">Construim cu suflet</div>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="back-body">
+        <div class="back-left">
+
+          <!-- Services — 2 columns, colored dots rotating flag colors -->
+          <div class="svc-grid">
+            <div class="svc-item"><span class="svc-dot d-blue"></span>Renovări interioare</div>
+            <div class="svc-item"><span class="svc-dot d-red"></span>Instalații sanitare</div>
+            <div class="svc-item"><span class="svc-dot d-yellow"></span>Instalații electrice</div>
+            <div class="svc-item"><span class="svc-dot d-blue"></span>Montaj mobilă</div>
+            <div class="svc-item"><span class="svc-dot d-red"></span>Acoperiș & Fațade</div>
+            <div class="svc-item"><span class="svc-dot d-yellow"></span>Mici reparații</div>
+          </div>
+
+          <!-- Phones — outlined style -->
+          <div class="back-phones">
+            <div class="bph bph-1">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M3.6 1.4C4 1 4.7 1 5.1 1.4l1.8 1.8c.4.4.4 1 0 1.4L5.8 5.8c-.1.1-.1.3 0 .5a10.5 10.5 0 0 0 3.9 3.9c.2.1.4.1.5 0l1.2-1.1c.4-.4 1-.4 1.4 0l1.8 1.8c.4.4.4 1.1 0 1.5l-1 1c-.8.8-2 1.1-3.1.7A14.5 14.5 0 0 1 3 6.5c-.4-1.1-.1-2.3.7-3.1l1-1Z" fill="#003DA5"/></svg>
+              <span>0768 440 083</span>
+            </div>
+            <div class="bph bph-2">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M3.6 1.4C4 1 4.7 1 5.1 1.4l1.8 1.8c.4.4.4 1 0 1.4L5.8 5.8c-.1.1-.1.3 0 .5a10.5 10.5 0 0 0 3.9 3.9c.2.1.4.1.5 0l1.2-1.1c.4-.4 1-.4 1.4 0l1.8 1.8c.4.4.4 1.1 0 1.5l-1 1c-.8.8-2 1.1-3.1.7A14.5 14.5 0 0 1 3 6.5c-.4-1.1-.1-2.3.7-3.1l1-1Z" fill="#CC092F"/></svg>
+              <span>0760 842 223</span>
+            </div>
+          </div>
+
+          <!-- Info + messengers -->
+          <div class="bottom-row">
+            <div class="info-group">
+              <div class="info-bit"><span class="ib-icon">📍</span> mun. Bălți</div>
+              <div class="info-bit"><span class="ib-icon">🕐</span> L-V 08–18</div>
+            </div>
+            <div class="msgs">
+              <div title="WhatsApp">
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M23.3 8.7A10.4 10.4 0 0 0 7.6 22.1L6 26l4-1.5a10.4 10.4 0 0 0 5 1.3h0A10.4 10.4 0 0 0 23.3 8.7ZM16 24a8.6 8.6 0 0 1-4.4-1.2l-.3-.2-3.2 1.2 1.2-3.1-.2-.3A8.6 8.6 0 1 1 24.6 16 8.6 8.6 0 0 1 16 24Zm4.7-6.4c-.3-.1-1.5-.8-1.8-.9s-.4-.1-.6.1-.7.9-.8 1-.3.2-.6 0a7.7 7.7 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.6a.5.5 0 0 0 0-.5c-.1-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.2 5.2 0 0 0 1.7.6 4 4 0 0 0 1.9-.1 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3Z" fill="#fff"/></svg>
+              </div>
+              <div title="Viber">
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#7360F2"/><path d="M23.5 10.2a12.5 12.5 0 0 0-5.1-3.1c-1.2-.3-3.3-.3-4.6 0a12.2 12.2 0 0 0-4.8 2.9c-1.2 1.2-1.7 2.2-2 3.7a8 8 0 0 0 .5 5l-.4 1.3c-.4 1.4-.8 2.7-.7 2.8s1.4-.3 2.8-.7l1.3-.5a10 10 0 0 0 3.3.8c2.5.2 4.6-.3 6.5-1.5a9.5 9.5 0 0 0 3.6-5 7.8 7.8 0 0 0-.4-5.7Z" fill="#fff"/></svg>
+              </div>
+              <div title="Telegram">
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#26A5E4"/><path d="M22.8 9.5l-2.8 14c-.2.9-.8 1.1-1.5.7l-4.2-3.1-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.5-.5-.2l-9.7 6.1-4.1-1.3c-.9-.3-.9-.9.2-1.3l16.2-6.2c.7-.3 1.4.2 1.2 1.3Z" fill="#fff"/></svg>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- QR -->
+        <div class="back-right">
+          <div class="qr-hint">Scanează</div>
+          <div class="qr-wrap">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://eunic.md&color=003DA5" alt="QR — eunic.md">
+          </div>
+          <div class="qr-url">eunic.md</div>
+        </div>
+
+      </div>
+
+      <div class="back-bottombar">
+        <div class="bb-blue"></div>
+        <div class="bb-yellow"></div>
+        <div class="bb-red"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

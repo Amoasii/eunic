@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eunic-Invest — Swiss Minimalist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --accent: #1a47b8;
+      --gray-100: #f5f5f5;
+      --gray-300: #d4d4d4;
+      --gray-500: #737373;
+      --gray-700: #404040;
+      --card-w: 800px;
+      --card-h: 480px;
+      --card-radius: 9px;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: var(--gray-100);
+      font-family: var(--font);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 90px 28px;
+      gap: 78px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Page title ── */
+    .page-title {
+      font-family: var(--font);
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 6px;
+    }
+
+    /* ── Cards wrapper ── */
+    .cards-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 67px;
+    }
+    @media (min-width: 1800px) {
+      .cards-wrapper {
+        flex-direction: row;
+        gap: 100px;
+        align-items: flex-start;
+      }
+    }
+
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-label {
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 17px;
+    }
+
+    /* ── Card shell ── */
+    .card {
+      width: var(--card-w);
+      height: var(--card-h);
+      min-height: var(--card-h);
+      max-height: var(--card-h);
+      background: var(--white);
+      border-radius: var(--card-radius);
+      box-shadow:
+        0 1px 3px rgba(0,0,0,0.06),
+        0 8px 32px rgba(0,0,0,0.10);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ═══════════════════════════════════════
+       FRONT (Față)
+       ═══════════════════════════════════════ */
+    .front {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 50px 56px 45px;
+    }
+
+    /* Top row: logo + url */
+    .front-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .front-logo {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+
+    .front-url-top {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--gray-500);
+      letter-spacing: 1.5px;
+    }
+
+    /* Center: slogan block */
+    .front-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .front-slogan {
+      font-size: 46px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--black);
+      letter-spacing: -0.5px;
+      margin-bottom: 28px;
+    }
+
+    .front-divider {
+      width: 90px;
+      height: 3px;
+      background: var(--accent);
+      border: none;
+      margin-bottom: 25px;
+    }
+
+    .front-badges {
+      display: flex;
+      gap: 34px;
+    }
+
+    .front-badge {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--gray-500);
+    }
+
+    /* Bottom row */
+    .front-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .front-free {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.7px;
+    }
+
+    .front-url {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 0.7px;
+    }
+
+    /* ═══════════════════════════════════════
+       BACK (Verso)
+       ═══════════════════════════════════════ */
+    .back {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr auto;
+      padding: 39px 45px 34px;
+      gap: 0;
+    }
+
+    /* Left column content */
+    .back-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      grid-row: 1 / 4;
+      grid-column: 1;
+      padding-right: 28px;
+    }
+
+    /* Right column: QR */
+    .back-right {
+      grid-row: 1 / 4;
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Services */
+    .back-services-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3.5px;
+      color: var(--gray-500);
+      margin-bottom: 11px;
+    }
+
+    .back-services {
+      list-style: none;
+      margin-bottom: 22px;
+    }
+
+    .back-services li {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--black);
+      line-height: 1.7;
+      padding-left: 17px;
+      position: relative;
+    }
+
+    .back-services li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* Phones */
+    .back-phones {
+      margin-bottom: 20px;
+    }
+
+    .back-phone-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 6px;
+    }
+
+    .back-phone-icon {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+    }
+
+    .back-phone-number {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 1.1px;
+    }
+
+    /* Messengers */
+    .back-messengers {
+      display: flex;
+      gap: 11px;
+      margin-bottom: 20px;
+    }
+
+    .back-messenger-icon {
+      width: 31px;
+      height: 31px;
+      flex-shrink: 0;
+    }
+
+    /* Bottom info */
+    .back-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .back-info-row {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-700);
+      letter-spacing: 0.4px;
+    }
+
+    /* QR code */
+    .back-qr {
+      width: 140px;
+      height: 140px;
+      margin-top: 3px;
+    }
+
+    .back-qr-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--gray-500);
+      margin-top: 8px;
+    }
+
+    .back-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-top: auto;
+    }
+
+    .back-logo {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+    }
+
+    .back-brand-name {
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--black);
+    }
+
+    /* ── Mobile scaling ── */
+    @media (max-width: 860px) {
+      :root {
+        --card-w: 94vw;
+        --card-h: calc(94vw * 0.6);
+      }
+
+      body {
+        padding: 40px 14px;
+        gap: 44px;
+      }
+
+      .front {
+        padding: 6.5% 7% 5.5%;
+      }
+
+      .front-logo { width: 36px; height: 36px; }
+
+      .front-slogan {
+        font-size: clamp(22px, 5.8vw, 46px);
+        margin-bottom: 16px;
+      }
+
+      .front-divider {
+        width: 56px;
+        margin-bottom: 14px;
+      }
+
+      .front-badges { gap: 17px; }
+
+      .front-badge {
+        font-size: 10px;
+        letter-spacing: 2px;
+      }
+
+      .front-free { font-size: 12px; }
+      .front-url { font-size: 15px; }
+      .front-url-top { font-size: 11px; }
+
+      .back {
+        padding: 5.5% 5.5% 4.5%;
+      }
+
+      .back-services-title { font-size: 10px; margin-bottom: 6px; }
+
+      .back-services li {
+        font-size: 12px;
+        line-height: 1.6;
+        padding-left: 13px;
+      }
+
+      .back-services li::before {
+        width: 4px;
+        height: 4px;
+      }
+
+      .back-services { margin-bottom: 14px; }
+
+      .back-phone-number { font-size: 15px; }
+      .back-phone-icon { width: 14px; height: 14px; }
+      .back-phones { margin-bottom: 11px; }
+
+      .back-messenger-icon { width: 25px; height: 25px; }
+      .back-messengers { gap: 8px; margin-bottom: 11px; }
+
+      .back-info-row { font-size: 11px; }
+
+      .back-qr { width: 100px; height: 100px; }
+      .back-qr-label { font-size: 9px; }
+      .back-logo { width: 25px; height: 25px; }
+      .back-brand-name { font-size: 12px; letter-spacing: 3px; }
+    }
+
+    /* ── Print ── */
+    @media print {
+      body {
+        background: none;
+        padding: 10mm;
+        gap: 10mm;
+      }
+
+      .page-title { display: none; }
+      .card-label { display: none; }
+
+      .cards-wrapper {
+        flex-direction: column;
+        gap: 8mm;
+      }
+
+      .card {
+        width: 85mm;
+        height: 55mm;
+        min-height: 55mm;
+        max-height: 55mm;
+        border-radius: 0;
+        box-shadow: none;
+        border: 0.5pt solid #ccc;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .front {
+        padding: 5mm 6mm 4.5mm;
+      }
+
+      .front-logo { width: 6mm; height: 6mm; }
+
+      .front-slogan {
+        font-size: 14pt;
+        margin-bottom: 3mm;
+      }
+
+      .front-divider {
+        width: 10mm;
+        height: 0.5mm;
+        margin-bottom: 2.5mm;
+      }
+
+      .front-badge {
+        font-size: 5pt;
+        letter-spacing: 1.5px;
+      }
+
+      .front-free { font-size: 5.5pt; }
+      .front-url { font-size: 7pt; }
+      .front-url-top { font-size: 5pt; }
+
+      .back {
+        padding: 4mm 4.5mm 3.5mm;
+      }
+
+      .back-services-title {
+        font-size: 4.5pt;
+        margin-bottom: 1mm;
+      }
+
+      .back-services li {
+        font-size: 6pt;
+        line-height: 1.65;
+        padding-left: 2mm;
+      }
+
+      .back-services li::before {
+        width: 0.8mm;
+        height: 0.8mm;
+      }
+
+      .back-services { margin-bottom: 2.5mm; }
+
+      .back-phone-number { font-size: 7pt; }
+      .back-phone-icon { width: 2.5mm; height: 2.5mm; }
+      .back-phones { margin-bottom: 2mm; }
+
+      .back-messenger-icon { width: 4mm; height: 4mm; }
+      .back-messengers { gap: 1.5mm; margin-bottom: 2mm; }
+
+      .back-info-row { font-size: 5pt; }
+
+      .back-qr { width: 16mm; height: 16mm; }
+      .back-qr-label { font-size: 4pt; margin-top: 1mm; }
+      .back-logo { width: 4mm; height: 4mm; }
+      .back-brand-name { font-size: 5pt; letter-spacing: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">Eunic-Invest &mdash; Swiss Minimalist</div>
+
+  <div class="cards-wrapper">
+
+    <!-- ═══════ FRONT ═══════ -->
+    <div class="card-container">
+      <div class="card-label">Fa&#x21B;&#x103;</div>
+      <div class="card front">
+
+        <div class="front-top">
+          <img src="../../logo.png" alt="Eunic-Invest" class="front-logo">
+          <span class="front-url-top">eunic.md</span>
+        </div>
+
+        <div class="front-center">
+          <div class="front-slogan">Renov&#x103;ri &amp;<br>Repara&#x21B;ii Complete</div>
+          <hr class="front-divider">
+          <div class="front-badges">
+            <span class="front-badge">Experien&#x21B;&#x103;</span>
+            <span class="front-badge">Calitate</span>
+            <span class="front-badge">Pre&#x21B;uri corecte</span>
+          </div>
+        </div>
+
+        <div class="front-bottom">
+          <span class="front-free">Consulta&#x21B;ie &#x219;i m&#x103;surare gratuit&#x103;</span>
+          <span class="front-url">eunic.md</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════ BACK ═══════ -->
+    <div class="card-container">
+      <div class="card-label">Verso</div>
+      <div class="card back">
+
+        <div class="back-left">
+
+          <!-- Services -->
+          <div>
+            <div class="back-services-title">Servicii</div>
+            <ul class="back-services">
+              <li>Renov&#x103;ri interioare</li>
+              <li>Instala&#x21B;ii sanitare</li>
+              <li>Instala&#x21B;ii electrice</li>
+              <li>Montaj mobil&#x103;</li>
+              <li>Acoperi&#x219; &amp; Fa&#x21B;ade</li>
+              <li>Mici repara&#x21B;ii casnice</li>
+            </ul>
+          </div>
+
+          <!-- Phones -->
+          <div class="back-phones">
+            <div class="back-phone-row">
+              <svg class="back-phone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+              <span class="back-phone-number">0768 440 083</span>
+            </div>
+            <div class="back-phone-row">
+              <svg class="back-phone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+              <span class="back-phone-number">0760 842 223</span>
+            </div>
+          </div>
+
+          <!-- Messengers -->
+          <div class="back-messengers">
+            <!-- WhatsApp -->
+            <svg class="back-messenger-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M23.3 8.7A10.4 10.4 0 0 0 7.6 22.1L6 26l4-1.5a10.4 10.4 0 0 0 5 1.3h0A10.4 10.4 0 0 0 23.3 8.7ZM16 24a8.6 8.6 0 0 1-4.4-1.2l-.3-.2-3.2 1.2 1.2-3.1-.2-.3A8.6 8.6 0 1 1 24.6 16 8.6 8.6 0 0 1 16 24Zm4.7-6.4c-.3-.1-1.5-.8-1.8-.9s-.4-.1-.6.1-.7.9-.8 1-.3.2-.6 0a7.7 7.7 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.6a.5.5 0 0 0 0-.5c-.1-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.2 5.2 0 0 0 1.7.6 4 4 0 0 0 1.9-.1 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3Z" fill="#fff"/></svg>
+            <!-- Viber -->
+            <svg class="back-messenger-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#7360F2"/><path d="M23.5 10.2a12.5 12.5 0 0 0-5.1-3.1c-1.2-.3-3.3-.3-4.6 0a12.2 12.2 0 0 0-4.8 2.9c-1.2 1.2-1.7 2.2-2 3.7a8 8 0 0 0 .5 5l-.4 1.3c-.4 1.4-.8 2.7-.7 2.8s1.4-.3 2.8-.7l1.3-.5a10 10 0 0 0 3.3.8c2.5.2 4.6-.3 6.5-1.5a9.5 9.5 0 0 0 3.6-5 7.8 7.8 0 0 0-.4-5.7ZM21.8 18a7.4 7.4 0 0 1-1.5 1.7c-.4.3-.5.3-1 .2a14.4 14.4 0 0 1-4.8-2.7 15.3 15.3 0 0 1-2.7-3.2c-.4-.6-.6-1-.5-1.3A7.4 7.4 0 0 1 13 11c.3-.2.4-.2.6-.1l.8 1.8c.2.5.4.9.3 1s-.3.4-.4.5-.2.3-.1.5a9.8 9.8 0 0 0 1.7 2.1 8.8 8.8 0 0 0 2.3 1.5c.2.1.3.1.5 0s.3-.4.5-.6.3-.3.5-.2l1.8.8c.3.2.5.3.5.4a2.2 2.2 0 0 1-.2 1.3Z" fill="#fff"/><path d="M17 11.5a4.8 4.8 0 0 1 2.8 1.5 4.8 4.8 0 0 1 .9 2.3.4.4 0 0 0 .7 0 5.4 5.4 0 0 0-1.1-2.8A5.5 5.5 0 0 0 17 11a.4.4 0 0 0 0 .7Z" fill="#fff"/></svg>
+            <!-- Telegram -->
+            <svg class="back-messenger-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#26A5E4"/><path d="M22.8 9.5l-2.8 14c-.2.9-.8 1.1-1.5.7l-4.2-3.1-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.5-.5-.2l-9.7 6.1-4.1-1.3c-.9-.3-.9-.9.2-1.3l16.2-6.2c.7-.3 1.4.2 1.2 1.3Z" fill="#fff"/></svg>
+          </div>
+
+          <!-- Bottom info -->
+          <div class="back-info">
+            <span class="back-info-row">mun. B&#x103;l&#x21B;i, Moldova</span>
+            <span class="back-info-row">L&#x2013;V 08:00&#x2013;18:00 &nbsp;/&nbsp; S 09:00&#x2013;15:00</span>
+          </div>
+
+        </div>
+
+        <div class="back-right">
+          <img
+            class="back-qr"
+            src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://eunic.md"
+            alt="QR eunic.md"
+          >
+          <span class="back-qr-label">eunic.md</span>
+
+          <div class="back-brand">
+            <img src="../../logo.png" alt="Eunic-Invest" class="back-logo">
+            <span class="back-brand-name">Eunic</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

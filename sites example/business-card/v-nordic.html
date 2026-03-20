@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eunic-Invest — Scandinavian Clean</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f8f8f6;
+      --blue: #4a6fa5;
+      --beige: #e8dfd0;
+      --dark: #2c3e50;
+      --muted: #7a8a9a;
+      --body-bg: #e8e4dc;
+      --card-w: 800px;
+      --card-h: 480px;
+      --card-radius: 22px;
+      --pill-radius: 28px;
+      --shadow: 0 3px 11px rgba(0,0,0,0.06);
+      --shadow-card: 0 6px 34px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.04);
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: var(--body-bg);
+      font-family: var(--font);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 90px 28px;
+      gap: 78px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* -- Page title -- */
+    .page-title {
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    /* -- Cards wrapper -- */
+    .cards-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 67px;
+    }
+    @media (min-width: 1800px) {
+      .cards-wrapper {
+        flex-direction: row;
+        gap: 100px;
+        align-items: flex-start;
+      }
+    }
+
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-label {
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    /* -- Card shell -- */
+    .card {
+      width: var(--card-w);
+      height: var(--card-h);
+      min-height: var(--card-h);
+      max-height: var(--card-h);
+      background: var(--bg);
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ===================================
+       FRONT (Fa&#x21B;&#x103;)
+       =================================== */
+    .front {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 45px 50px 40px;
+    }
+
+    /* Top: logo bubble */
+    .front-top {
+      display: flex;
+      align-items: center;
+    }
+
+    .front-brand-bubble {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--beige);
+      padding: 11px 25px 11px 14px;
+      border-radius: var(--pill-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .front-logo {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
+    }
+
+    .front-brand-name {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: 0.4px;
+    }
+
+    /* Center: slogan + badges */
+    .front-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 3px;
+    }
+
+    .front-slogan {
+      font-size: 36px;
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--dark);
+      letter-spacing: -0.3px;
+      margin-bottom: 25px;
+    }
+
+    .front-badges {
+      display: flex;
+      gap: 11px;
+      flex-wrap: wrap;
+    }
+
+    .front-badge {
+      display: inline-block;
+      background: var(--beige);
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.7px;
+      padding: 7px 20px;
+      border-radius: 42px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Bottom row */
+    .front-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .front-free {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.3px;
+    }
+
+    .front-url {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.4px;
+    }
+
+    /* ===================================
+       BACK (Verso)
+       =================================== */
+    .back {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      padding: 34px 40px 31px;
+      gap: 0;
+    }
+
+    .back-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      grid-row: 1 / 2;
+      grid-column: 1;
+      padding-right: 22px;
+    }
+
+    .back-right {
+      grid-row: 1 / 2;
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Services as tag pills */
+    .back-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 20px;
+    }
+
+    .back-service-tag {
+      display: inline-block;
+      background: var(--beige);
+      color: var(--dark);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 28px;
+      letter-spacing: 0.2px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    /* Phones in soft blue rounded boxes */
+    .back-phones {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 17px;
+    }
+
+    .back-phone-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      background: rgba(74, 111, 165, 0.08);
+      padding: 8px 17px;
+      border-radius: 17px;
+      align-self: flex-start;
+    }
+
+    .back-phone-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--blue);
+    }
+
+    .back-phone-number {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 0.7px;
+    }
+
+    /* Messengers */
+    .back-messengers {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 17px;
+    }
+
+    .back-messenger-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(74, 111, 165, 0.06);
+      border-radius: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    .back-messenger-icon {
+      width: 25px;
+      height: 25px;
+      flex-shrink: 0;
+    }
+
+    /* Info rows with soft blue icons */
+    .back-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .back-info-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--dark);
+      letter-spacing: 0.2px;
+    }
+
+    .back-info-icon {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+      color: var(--blue);
+    }
+
+    /* QR code area */
+    .back-qr-frame {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--beige);
+      padding: 14px 14px 8px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .back-qr {
+      width: 123px;
+      height: 123px;
+      border-radius: 8px;
+    }
+
+    .back-qr-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 7px;
+    }
+
+    /* Brand mark at bottom-right */
+    .back-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    .back-logo {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .back-brand-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: 1.4px;
+    }
+
+    /* -- Mobile scaling -- */
+    @media (max-width: 860px) {
+      :root {
+        --card-w: 94vw;
+        --card-h: calc(94vw * 0.6);
+      }
+
+      body {
+        padding: 44px 16px;
+        gap: 50px;
+      }
+
+      .front {
+        padding: 6% 6.5% 5%;
+      }
+
+      .front-brand-bubble {
+        padding: 8px 18px 8px 10px;
+        gap: 9px;
+      }
+
+      .front-logo { width: 34px; height: 34px; }
+
+      .front-brand-name { font-size: 16px; }
+
+      .front-slogan {
+        font-size: clamp(18px, 4.5vw, 36px);
+        margin-bottom: 16px;
+      }
+
+      .front-badges { gap: 7px; }
+
+      .front-badge {
+        font-size: 10px;
+        padding: 5px 13px;
+      }
+
+      .front-free { font-size: 12px; }
+      .front-url { font-size: 14px; }
+
+      .back {
+        padding: 5% 5% 4.5%;
+      }
+
+      .back-service-tag {
+        font-size: 10px;
+        padding: 4px 10px;
+      }
+
+      .back-services { margin-bottom: 11px; gap: 5px; }
+
+      .back-phone-box {
+        padding: 6px 11px;
+        gap: 7px;
+        border-radius: 11px;
+      }
+
+      .back-phone-number { font-size: 14px; }
+      .back-phone-icon { width: 14px; height: 14px; }
+      .back-phones { gap: 5px; margin-bottom: 10px; }
+
+      .back-messenger-wrap {
+        width: 28px;
+        height: 28px;
+        border-radius: 10px;
+      }
+
+      .back-messenger-icon { width: 20px; height: 20px; }
+      .back-messengers { gap: 6px; margin-bottom: 10px; }
+
+      .back-info-row { font-size: 10px; gap: 6px; }
+      .back-info-icon { width: 13px; height: 13px; }
+
+      .back-qr-frame {
+        padding: 10px 10px 6px;
+        border-radius: 14px;
+      }
+
+      .back-qr { width: 90px; height: 90px; border-radius: 6px; }
+      .back-qr-label { font-size: 9px; }
+      .back-logo { width: 22px; height: 22px; }
+      .back-brand-name { font-size: 10px; }
+    }
+
+    /* -- Print -- */
+    @media print {
+      body {
+        background: none;
+        padding: 10mm;
+        gap: 10mm;
+      }
+
+      .page-title { display: none; }
+      .card-label { display: none; }
+
+      .cards-wrapper {
+        flex-direction: column;
+        gap: 8mm;
+      }
+
+      .card {
+        width: 85mm;
+        height: 55mm;
+        min-height: 55mm;
+        max-height: 55mm;
+        border-radius: 0;
+        box-shadow: none;
+        border: 0.5pt solid #ccc;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .front {
+        padding: 4.5mm 5.5mm 4mm;
+      }
+
+      .front-brand-bubble {
+        padding: 1.5mm 3.5mm 1.5mm 2mm;
+        gap: 1.5mm;
+        border-radius: 3mm;
+      }
+
+      .front-logo { width: 5mm; height: 5mm; }
+      .front-brand-name { font-size: 7pt; }
+
+      .front-slogan {
+        font-size: 12pt;
+        margin-bottom: 2.5mm;
+      }
+
+      .front-badges { gap: 1.5mm; }
+
+      .front-badge {
+        font-size: 5pt;
+        padding: 0.8mm 2.5mm;
+        border-radius: 3mm;
+      }
+
+      .front-free { font-size: 5pt; }
+      .front-url { font-size: 6pt; }
+
+      .back {
+        padding: 3.5mm 4mm 3mm;
+      }
+
+      .back-service-tag {
+        font-size: 4.5pt;
+        padding: 0.6mm 1.8mm;
+        border-radius: 2.5mm;
+      }
+
+      .back-services { margin-bottom: 2mm; gap: 0.8mm; }
+
+      .back-phone-box {
+        padding: 1mm 2mm;
+        gap: 1mm;
+        border-radius: 1.5mm;
+      }
+
+      .back-phone-number { font-size: 6.5pt; }
+      .back-phone-icon { width: 2.5mm; height: 2.5mm; }
+      .back-phones { gap: 1mm; margin-bottom: 1.5mm; }
+
+      .back-messenger-wrap {
+        width: 4.5mm;
+        height: 4.5mm;
+        border-radius: 1.2mm;
+      }
+
+      .back-messenger-icon { width: 3mm; height: 3mm; }
+      .back-messengers { gap: 1mm; margin-bottom: 1.5mm; }
+
+      .back-info-row { font-size: 5pt; gap: 1mm; }
+      .back-info-icon { width: 2mm; height: 2mm; }
+
+      .back-qr-frame {
+        padding: 1.5mm 1.5mm 1mm;
+        border-radius: 2mm;
+      }
+
+      .back-qr { width: 14mm; height: 14mm; border-radius: 1mm; }
+      .back-qr-label { font-size: 4pt; margin-top: 0.5mm; }
+      .back-logo { width: 3.5mm; height: 3.5mm; }
+      .back-brand-name { font-size: 4.5pt; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">Eunic-Invest &mdash; Scandinavian Clean</div>
+
+  <div class="cards-wrapper">
+
+    <!-- ======= FRONT ======= -->
+    <div class="card-container">
+      <div class="card-label">Fa&#x21B;&#x103;</div>
+      <div class="card front">
+
+        <div class="front-top">
+          <div class="front-brand-bubble">
+            <img src="../../logo.png" alt="Eunic-Invest" class="front-logo">
+            <span class="front-brand-name">Eunic-Invest</span>
+          </div>
+        </div>
+
+        <div class="front-center">
+          <div class="front-slogan">Renov&#x103;ri &amp; Repara&#x21B;ii Complete</div>
+          <div class="front-badges">
+            <span class="front-badge">Experien&#x21B;&#x103;</span>
+            <span class="front-badge">Calitate</span>
+            <span class="front-badge">Pre&#x21B;uri corecte</span>
+          </div>
+        </div>
+
+        <div class="front-bottom">
+          <span class="front-free">Consulta&#x21B;ie &#x219;i m&#x103;surare gratuit&#x103;</span>
+          <span class="front-url">eunic.md</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======= BACK ======= -->
+    <div class="card-container">
+      <div class="card-label">Verso</div>
+      <div class="card back">
+
+        <div class="back-left">
+
+          <!-- Services as tag pills -->
+          <div class="back-services">
+            <span class="back-service-tag">Renov&#x103;ri interioare</span>
+            <span class="back-service-tag">Instala&#x21B;ii sanitare</span>
+            <span class="back-service-tag">Instala&#x21B;ii electrice</span>
+            <span class="back-service-tag">Montaj mobil&#x103;</span>
+            <span class="back-service-tag">Acoperi&#x219; &amp; Fa&#x21B;ade</span>
+            <span class="back-service-tag">Mici repara&#x21B;ii casnice</span>
+          </div>
+
+          <!-- Phones in soft blue rounded boxes -->
+          <div class="back-phones">
+            <div class="back-phone-box">
+              <svg class="back-phone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+              <span class="back-phone-number">0768 440 083</span>
+            </div>
+            <div class="back-phone-box">
+              <svg class="back-phone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+              <span class="back-phone-number">0760 842 223</span>
+            </div>
+          </div>
+
+          <!-- Messengers -->
+          <div class="back-messengers">
+            <div class="back-messenger-wrap">
+              <!-- WhatsApp -->
+              <svg class="back-messenger-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M23.3 8.7A10.4 10.4 0 0 0 7.6 22.1L6 26l4-1.5a10.4 10.4 0 0 0 5 1.3h0A10.4 10.4 0 0 0 23.3 8.7ZM16 24a8.6 8.6 0 0 1-4.4-1.2l-.3-.2-3.2 1.2 1.2-3.1-.2-.3A8.6 8.6 0 1 1 24.6 16 8.6 8.6 0 0 1 16 24Zm4.7-6.4c-.3-.1-1.5-.8-1.8-.9s-.4-.1-.6.1-.7.9-.8 1-.3.2-.6 0a7.7 7.7 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.6a.5.5 0 0 0 0-.5c-.1-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.2 5.2 0 0 0 1.7.6 4 4 0 0 0 1.9-.1 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3Z" fill="#fff"/></svg>
+            </div>
+            <div class="back-messenger-wrap">
+              <!-- Viber -->
+              <svg class="back-messenger-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#7360F2"/><path d="M23.5 10.2a12.5 12.5 0 0 0-5.1-3.1c-1.2-.3-3.3-.3-4.6 0a12.2 12.2 0 0 0-4.8 2.9c-1.2 1.2-1.7 2.2-2 3.7a8 8 0 0 0 .5 5l-.4 1.3c-.4 1.4-.8 2.7-.7 2.8s1.4-.3 2.8-.7l1.3-.5a10 10 0 0 0 3.3.8c2.5.2 4.6-.3 6.5-1.5a9.5 9.5 0 0 0 3.6-5 7.8 7.8 0 0 0-.4-5.7ZM21.8 18a7.4 7.4 0 0 1-1.5 1.7c-.4.3-.5.3-1 .2a14.4 14.4 0 0 1-4.8-2.7 15.3 15.3 0 0 1-2.7-3.2c-.4-.6-.6-1-.5-1.3A7.4 7.4 0 0 1 13 11c.3-.2.4-.2.6-.1l.8 1.8c.2.5.4.9.3 1s-.3.4-.4.5-.2.3-.1.5a9.8 9.8 0 0 0 1.7 2.1 8.8 8.8 0 0 0 2.3 1.5c.2.1.3.1.5 0s.3-.4.5-.6.3-.3.5-.2l1.8.8c.3.2.5.3.5.4a2.2 2.2 0 0 1-.2 1.3Z" fill="#fff"/><path d="M17 11.5a4.8 4.8 0 0 1 2.8 1.5 4.8 4.8 0 0 1 .9 2.3.4.4 0 0 0 .7 0 5.4 5.4 0 0 0-1.1-2.8A5.5 5.5 0 0 0 17 11a.4.4 0 0 0 0 .7Z" fill="#fff"/></svg>
+            </div>
+            <div class="back-messenger-wrap">
+              <!-- Telegram -->
+              <svg class="back-messenger-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#26A5E4"/><path d="M22.8 9.5l-2.8 14c-.2.9-.8 1.1-1.5.7l-4.2-3.1-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.5-.5-.2l-9.7 6.1-4.1-1.3c-.9-.3-.9-.9.2-1.3l16.2-6.2c.7-.3 1.4.2 1.2 1.3Z" fill="#fff"/></svg>
+            </div>
+          </div>
+
+          <!-- Address & Schedule -->
+          <div class="back-info">
+            <div class="back-info-row">
+              <svg class="back-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>mun. B&#x103;l&#x21B;i, Moldova</span>
+            </div>
+            <div class="back-info-row">
+              <svg class="back-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>L&#x2013;V 08:00&#x2013;18:00 &nbsp;/&nbsp; S 09:00&#x2013;15:00</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="back-right">
+          <!-- QR in beige rounded frame -->
+          <div class="back-qr-frame">
+            <img
+              class="back-qr"
+              src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://eunic.md&color=4a6fa5"
+              alt="QR eunic.md"
+            >
+            <span class="back-qr-label">eunic.md</span>
+          </div>
+
+          <div class="back-brand">
+            <img src="../../logo.png" alt="Eunic-Invest" class="back-logo">
+            <span class="back-brand-name">Eunic-Invest</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
