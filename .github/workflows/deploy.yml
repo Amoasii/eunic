@@ -25,15 +25,8 @@ jobs:
       - name: Build site
         run: |
           mkdir _site
-          cp sites/light/index.html sites/light/script.js sites/light/style.css _site/
-          cp -r sites/images _site/images
-          sed -i 's|\.\./images/|images/|g' _site/index.html _site/style.css
-          mkdir _site/dark
-          cp sites/dark/index.html sites/dark/script.js sites/dark/style.css _site/dark/
-          mkdir _site/bold
-          cp sites/bold/index.html sites/bold/script.js sites/bold/style.css _site/bold/
-          mkdir _site/minimal
-          cp sites/minimal/index.html sites/minimal/script.js sites/minimal/style.css _site/minimal/
+          cp site/index.html site/script.js site/style.css _site/
+          cp -r site/images _site/images
           echo 'eunic.md' > _site/CNAME
 
       - uses: actions/upload-pages-artifact@v3
